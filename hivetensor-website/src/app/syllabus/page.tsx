@@ -3,129 +3,9 @@ import Link from 'next/link';
 export default function Syllabus() {
   return (
     <>
-      <style jsx>{`
-        /* Syllabus specific styles */
-        :root {
-          --bg: #000;
-          --amber: #ffb300;
-          --amber-light: #ffc107;
-          --grad: linear-gradient(45deg, #000 0%, var(--amber) 80%);
-        }
-        
-        .hex-bg {
-          position: fixed;
-          inset: 0;
-          pointer-events: none;
-          background-image: radial-gradient(var(--amber) 1px, transparent 1px), radial-gradient(var(--amber) 1px, transparent 1px);
-          background-size: 50px 29px;
-          background-position: 0 0, 25px 15px;
-          opacity: 0.06;
-          animation: swarm 40s linear infinite;
-        }
-        
-        @keyframes swarm {
-          from { transform: translateY(0); }
-          to   { transform: translateY(-800px); }
-        }
-
-        header {
-          padding: 5rem 2rem 3.5rem;
-          text-align: center;
-          background: var(--grad);
-          clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-        }
-        
-        header h1 {
-          font-family: 'Anton', sans-serif;
-          font-size: clamp(2.5rem, 6vw, 4rem);
-          color: #000;
-          text-shadow: 0 0 6px var(--amber-light);
-          letter-spacing: -1px;
-        }
-        
-        .syllabus-nav {
-          margin-top: 2rem;
-          display: flex;
-          justify-content: center;
-          gap: 1.2rem;
-          flex-wrap: wrap;
-        }
-        
-        .syllabus-nav a {
-          color: var(--amber);
-          text-decoration: none;
-          font-weight: 700;
-          font-size: 0.95rem;
-          position: relative;
-        }
-        
-        .syllabus-nav a::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          bottom: -3px;
-          width: 0;
-          height: 2px;
-          background: var(--amber);
-          transition: width 0.3s;
-        }
-        
-        .syllabus-nav a:hover::after { width: 100%; }
-
-        main { max-width: 1000px; margin: auto; }
-        
-        .syllabus-section {
-          padding: 2.5rem 1.5rem;
-          border-left: 4px solid var(--amber);
-          margin-bottom: 4rem;
-          position: relative;
-        }
-        
-        .syllabus-section::before {
-          content: "\\25C7"; /* diamond */
-          position: absolute;
-          left: -12px;
-          top: 0;
-          font-size: 1.1rem;
-          color: var(--amber);
-        }
-        
-        .syllabus-section h2 {
-          font-family: 'Anton', sans-serif;
-          font-size: 2.25rem;
-          color: var(--amber);
-          margin-bottom: 1rem;
-        }
-        
-        .syllabus-section h3 {
-          font-family: 'Anton', sans-serif;
-          font-size: 1.5rem;
-          color: var(--amber-light);
-          margin-top: 1.4rem;
-          margin-bottom: 0.6rem;
-        }
-        
-        .syllabus-section ul { margin-left: 1.4rem; margin-bottom: 1rem; }
-        .syllabus-section li { margin-bottom: 0.35rem; }
-
-        .gradient-divider {
-          height: 3px;
-          background: var(--grad);
-          margin: 3rem 0;
-          border: none;
-        }
-        
-        .syllabus-footer {
-          text-align: center;
-          padding: 2rem 1rem;
-          font-size: 0.85rem;
-          color: var(--amber-light);
-        }
-      `}</style>
-
       <div className="hex-bg"></div>
       
-      <header>
+      <header className="syllabus-header">
         <h1>Hiveverse Bootcamp ◇ Hivetensor + Intelliverse collaboration</h1>
         <nav className="syllabus-nav">
           <a href="#phase1">Phase 1</a>
@@ -135,7 +15,7 @@ export default function Syllabus() {
         </nav>
       </header>
 
-      <main>
+      <main className="syllabus-main">
         {/* Phase 1 */}
         <section id="phase1" className="syllabus-section">
           <h2>Phase 1: Foundations</h2>

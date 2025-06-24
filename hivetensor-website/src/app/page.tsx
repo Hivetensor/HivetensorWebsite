@@ -5,10 +5,10 @@ export default function Home() {
     <>
       {/* Navigation */}
       <nav>
-        <div className="logo">
+        <Link href="/" className="logo">
           <span className="hex"></span>
           HIVETENSOR
-        </div>
+        </Link>
         <div className="nav-links">
           <a href="#manifesto">Manifesto</a>
           <a href="#how-it-works">How&nbsp;It&nbsp;Works</a>
