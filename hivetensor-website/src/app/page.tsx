@@ -5,16 +5,16 @@ export default function Home() {
     <>
       {/* Navigation */}
       <nav>
-        <div className="logo">
+        <Link href="/" className="logo">
           <span className="hex"></span>
           HIVETENSOR
-        </div>
+        </Link>
         <div className="nav-links">
           <a href="#how-it-works">How It Works</a>
           <Link href="/challenges">Challenges</Link>
           <Link href="/leaderboard">Leaderboard</Link>
           <Link href="/create">Create Challenge</Link>
-          <a href="#faq">FAQ</a>
+          <Link href="/faq">FAQ</Link>
         </div>
       </nav>
 
@@ -180,31 +180,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section id="faq" className="faq-section">
-        <div className="wrapper">
-          <h2 className="section-title">Frequently Asked Questions</h2>
-          <div className="faq-grid">
-            <div className="faq-item">
-              <h3>What is AutoML mining?</h3>
-              <p>Miners compete to solve machine learning challenges using automated ML tools. Winners earn crypto rewards based on model performance.</p>
-            </div>
-            <div className="faq-item">
-              <h3>How are rewards distributed?</h3>
-              <p>Rewards are split among top performers based on accuracy ranking. If no solution meets the target, rewards go to the growing jackpot.</p>
-            </div>
-            <div className="faq-item">
-              <h3>What happens to unsolved challenges?</h3>
-              <p>Unsolved challenge rewards accumulate in a jackpot pool, creating larger prizes for future competitions.</p>
-            </div>
-            <div className="faq-item">
-              <h3>Do I need ML expertise?</h3>
-              <p>AutoML tools make it accessible to anyone. Basic data science knowledge helps, but the tools handle most complexity.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="main-footer">
         <div className="wrapper">
@@ -215,7 +190,7 @@ export default function Home() {
                 <li><Link href="/challenges">Browse Challenges</Link></li>
                 <li><Link href="/create">Create Challenge</Link></li>
                 <li><Link href="/leaderboard">Leaderboard</Link></li>
-                <li><a href="#faq">FAQ</a></li>
+                <li><Link href="/faq">FAQ</Link></li>
               </ul>
             </div>
             <div className="footer-section">
