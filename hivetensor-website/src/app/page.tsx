@@ -214,10 +214,10 @@ export default function Home() {
             <div className="footer-section">
               <h4>Connect</h4>
               <div className="social-links">
-                <a href="#" aria-label="Twitter">𝕏</a>
-                <a href="#" aria-label="Discord">DC</a>
-                <a href="#" aria-label="GitHub">GH</a>
-                <a href="#" aria-label="Telegram">TG</a>
+                <a href="#" aria-label="Twitter"></a>
+                <a href="#" aria-label="Discord"></a>
+                <a href="#" aria-label="GitHub"></a>
+                <a href="#" aria-label="Telegram"></a>
               </div>
             </div>
           </div>

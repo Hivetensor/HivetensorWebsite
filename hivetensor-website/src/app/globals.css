@@ -568,13 +568,37 @@ nav {
   border: 1px solid rgba(255, 255, 255, 0.25);
   color: #fff;
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: 1rem;
   transition: all 0.25s;
+  position: relative;
+  font-weight: bold;
 }
 
 .social-links a:hover {
   border-color: var(--solar-gold);
   color: var(--solar-gold);
+  transform: translateY(-2px);
+}
+
+/* Platform-specific icons */
+.social-links a[aria-label="Twitter"]::before {
+  content: "🐦";
+  font-size: 1.2rem;
+}
+
+.social-links a[aria-label="Discord"]::before {
+  content: "💬";
+  font-size: 1.2rem;
+}
+
+.social-links a[aria-label="GitHub"]::before {
+  content: "⚡";
+  font-size: 1.2rem;
+}
+
+.social-links a[aria-label="Telegram"]::before {
+  content: "📱";
+  font-size: 1.2rem;
 }
 
 .footer-bottom {
@@ -864,4 +888,142 @@ nav {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+/* Under Construction Styles */
+.under-construction {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 2rem 0;
+  background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+}
+
+.construction-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(235, 183, 82, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(235, 183, 82, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(235, 183, 82, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.construction-content {
+  text-align: center;
+  max-width: 600px;
+  position: relative;
+  z-index: 2;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(235, 183, 82, 0.3);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+.construction-icon {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.gear {
+  font-size: 2.5rem;
+  animation: rotate 4s linear infinite;
+  color: var(--solar-gold);
+  filter: drop-shadow(0 0 10px rgba(235, 183, 82, 0.3));
+}
+
+.gear:nth-child(2) {
+  animation-delay: -1.33s;
+  animation-direction: reverse;
+}
+
+.gear:nth-child(3) {
+  animation-delay: -2.66s;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.construction-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--solar-gold);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.construction-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.construction-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border: 1px solid rgba(235, 183, 82, 0.2);
+  background: rgba(235, 183, 82, 0.05);
+}
+
+.launch-date {
+  color: var(--solar-gold);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.progress-indicator {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.construction-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .construction-content {
+    margin: 1rem;
+    padding: 2rem 1.5rem;
+  }
+  
+  .construction-content h1 {
+    font-size: 2rem;
+  }
+  
+  .construction-description {
+    font-size: 1rem;
+  }
+  
+  .construction-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .construction-actions .btn {
+    width: 100%;
+    max-width: 280px;
+  }
 }
