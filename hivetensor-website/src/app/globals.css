@@ -1,13 +1,53 @@
 @import "tailwindcss";
 
+/* Custom CSS Variables for Solar-Brutalist Theme */
+:root {
+  --solar-gold: #EBB752;
+  --solar-amber: #FFC857;
+  --success-green: #4ADE80;
+  --warning-orange: #FB923C;
+  --error-red: #EF4444;
+}
+
+/* Custom Tailwind Components */
+@layer components {
+  .btn {
+    @apply px-6 py-3 font-bold text-sm uppercase tracking-wider transition-all duration-300 border border-white/25 bg-transparent text-white hover:border-yellow-400 hover:text-yellow-400 hover:shadow-lg hover:shadow-yellow-400/20 hover:-translate-y-0.5;
+  }
+  
+  .btn-primary {
+    @apply bg-yellow-400 text-black border-yellow-400 hover:bg-yellow-300 hover:border-yellow-300 hover:text-black;
+  }
+  
+  .hex {
+    @apply w-6 h-6 bg-yellow-400 transform rotate-45 mr-3 shadow-lg shadow-yellow-400/30;
+  }
+}
+
+/* Custom animations that Tailwind doesn't cover */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(235, 183, 82, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(235, 183, 82, 0.6); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
 /*================================================================
   CORE PALETTE – solar‑brutalist spectrum
 =================================================================*/
 :root {
   /* Infernal sun‑core */
-  --solar-gold: #ffbe0b;
-  --solar-amber: #ff9b05;
-  /* basalt */
   --abyss-black: #000000;
   /* supportive greys */
   --obsidian-800: #0d0d0d;
@@ -78,10 +118,6 @@ nav {
   font-size:1.75rem; color:var(--solar-gold);
   font-family:'Bebas Neue',sans-serif; letter-spacing:1px;
   text-decoration: none;
-}
-.hex {
-  width:32px; aspect-ratio:1/1; background:var(--solar-gold);
-  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
 }
 .nav-links {display:flex; gap:2rem;}
 .nav-links a {
