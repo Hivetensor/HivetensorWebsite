@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+/* Essential custom animations */
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(235, 183, 82, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(235, 183, 82, 0.6); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-rotate {
+  animation: rotate 4s linear infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Ensure pure black backgrounds */
+body {
+  @apply bg-black;
+}
