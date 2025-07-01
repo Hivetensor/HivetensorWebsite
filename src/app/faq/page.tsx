@@ -69,7 +69,7 @@ export default function FAQ() {
         },
         {
           question: "Can I withdraw my earnings immediately?",
-          answer: "Yes, rewards are paid directly to your wallet and are immediately available for withdrawal or trading. We don't hold funds or require minimum withdrawal amounts."
+          answer: "Yes, rewards are paid directly to your wallet and are immediately available for withdrawal or trading. We don&apos;t hold funds or require minimum withdrawal amounts."
         }
       ]
     },

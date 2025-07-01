@@ -7,12 +7,8 @@ import {
   Users,
   Clock,
   Coins,
-  TrendingUp,
-  Filter,
   Search,
-  ChevronDown,
   Star,
-  Target,
   DollarSign
 } from 'lucide-react';
 

@@ -245,7 +245,7 @@ export default function HomePage() {
                 <Coins className="w-8 h-8 text-yellow-500" />
               </div>
               <h3 className="text-lg font-bold mb-2 text-white">Earn Rewards</h3>
-              <p className="text-white/70 text-sm">Get crypto rewards based on your model's performance and ranking</p>
+              <p className="text-white/70 text-sm">Get crypto rewards based on your model&apos;s performance and ranking</p>
             </div>
           </div>
         </div>

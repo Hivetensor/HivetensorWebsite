@@ -1,4 +1,4 @@
-import Link from 'next/link';
+// Syllabus page component
 
 export default function Syllabus() {
   return (
@@ -28,10 +28,10 @@ export default function Syllabus() {
           </ul>
           <h3>Week 2 — Practical ML & Initial Project</h3>
           <ul>
-            <li><strong>Module 2.1:</strong> Feature Engineering & Data Prep – competition & "feature detective".</li>
+            <li><strong>Module 2.1:</strong> Feature Engineering & Data Prep – competition & &quot;feature detective&quot;.</li>
             <li><strong>Module 2.2:</strong> Model Evaluation & Validation – cross‑validation, model court simulation.</li>
             <li><strong>Module A:</strong> Kolmogorov Corner – algorithmic information theory & compression challenge.</li>
-            <li><strong>Module 2.3:</strong> ML Ethics & Real Stakes – demilitarization, "hard choices" simulation.</li>
+            <li><strong>Module 2.3:</strong> ML Ethics & Real Stakes – demilitarization, &quot;hard choices&quot; simulation.</li>
             <li><strong>Capstone:</strong> Build‑a‑Baseline — churn, sentiment transfer, anomaly detection.</li>
           </ul>
         </section>
