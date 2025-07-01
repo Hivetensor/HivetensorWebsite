@@ -27,7 +27,7 @@ export default function HomePage() {
             HIVETENSOR
           </Link>
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/#how-it-works" className="text-white/80 hover:text-yellow-500 transition-colors">How It Works</Link>
+            <Link href="/#how-it-works" className="text-white/80 hover:text-yellow-500 transition-colors">How This Works</Link>
             <Link href="/challenges" className="text-white/80 hover:text-yellow-500 transition-colors">Challenges</Link>
             <Link href="/leaderboard" className="text-white/80 hover:text-yellow-500 transition-colors">Leaderboard</Link>
             <Link href="/create" className="text-white/80 hover:text-yellow-500 transition-colors">Create Challenge</Link>
