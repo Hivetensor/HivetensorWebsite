@@ -235,23 +235,23 @@ export default function Challenges() {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-          <div className="border-2 border-gray-600 p-6 bg-gray-900">
+          <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-solar-gold font-semibold mb-2">Active Challenges</h3>
             <p className="text-3xl font-bold">
               {challengesData.filter(c => c.status === 'active').length}
             </p>
           </div>
-          <div className="border-2 border-gray-600 p-6 bg-gray-900">
+          <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-solar-gold font-semibold mb-2">Total Prize Pool</h3>
             <p className="text-3xl font-bold">₿ {challengesData.reduce((sum, c) => sum + c.prizePool, 0).toFixed(1)}</p>
           </div>
-          <div className="border-2 border-gray-600 p-6 bg-gray-900">
+          <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-solar-gold font-semibold mb-2">Total Participants</h3>
             <p className="text-3xl font-bold">
               {challengesData.reduce((sum, c) => sum + c.participants, 0).toLocaleString()}
             </p>
           </div>
-          <div className="border-2 border-gray-600 p-6 bg-gray-900">
+          <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-solar-gold font-semibold mb-2">Submissions Today</h3>
             <p className="text-3xl font-bold">156</p>
           </div>
@@ -264,8 +264,8 @@ export default function Challenges() {
             ({filteredChallenges.length})
           </h3>
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-            {filteredChallenges.map((challenge) => (
-              <div key={challenge.id} className="border-2 border-gray-600 bg-gray-900 hover:border-solar-gold transition-all duration-300">
+                         {filteredChallenges.map((challenge) => (
+               <div key={challenge.id} className="border-2 border-gray-600 bg-black hover:border-solar-gold transition-all duration-300">
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div className="flex items-center space-x-2">
@@ -340,7 +340,7 @@ export default function Challenges() {
 
         {/* Create Challenge CTA */}
         <div className="mt-16 text-center">
-          <div className="border-2 border-solar-gold p-8 bg-gradient-to-r from-gray-900 to-black">
+          <div className="border-2 border-solar-gold p-8 bg-black">
             <h3 className="text-2xl font-bold text-solar-gold mb-4">Have a Challenge Idea?</h3>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
               Create your own AI challenge and sponsor the prize pool. 

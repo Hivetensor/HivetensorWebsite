@@ -87,17 +87,17 @@ export default function CreateChallenge() {
         <div className="mb-12">
           <h2 className="text-2xl font-semibold text-solar-gold mb-6">Why Create a Challenge?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="border-2 border-gray-600 p-6 bg-gray-900">
+            <div className="border-2 border-gray-600 p-6 bg-black">
               <div className="text-3xl mb-4">🧠</div>
               <h3 className="text-lg font-semibold text-white mb-2">Advance Research</h3>
               <p className="text-gray-300 text-sm">Crowdsource solutions to complex AI problems and accelerate breakthrough discoveries.</p>
             </div>
-            <div className="border-2 border-gray-600 p-6 bg-gray-900">
+            <div className="border-2 border-gray-600 p-6 bg-black">
               <div className="text-3xl mb-4">🌍</div>
               <h3 className="text-lg font-semibold text-white mb-2">Global Talent</h3>
               <p className="text-gray-300 text-sm">Access diverse perspectives from AI researchers and practitioners worldwide.</p>
             </div>
-            <div className="border-2 border-gray-600 p-6 bg-gray-900">
+            <div className="border-2 border-gray-600 p-6 bg-black">
               <div className="text-3xl mb-4">💎</div>
               <h3 className="text-lg font-semibold text-white mb-2">Quality Solutions</h3>
               <p className="text-gray-300 text-sm">Competition drives innovation and produces high-quality, validated solutions.</p>
@@ -108,7 +108,7 @@ export default function CreateChallenge() {
         {/* Challenge Creation Form */}
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Basic Information */}
-          <div className="border-2 border-gray-600 p-6 bg-gray-900">
+          <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-xl font-semibold text-solar-gold mb-6">Basic Information</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -191,7 +191,7 @@ export default function CreateChallenge() {
           </div>
 
           {/* Challenge Configuration */}
-          <div className="border-2 border-gray-600 p-6 bg-gray-900">
+          <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-xl font-semibold text-solar-gold mb-6">Challenge Configuration</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -308,7 +308,7 @@ export default function CreateChallenge() {
           </div>
 
           {/* Dataset Information */}
-          <div className="border-2 border-gray-600 p-6 bg-gray-900">
+          <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-xl font-semibold text-solar-gold mb-6">Dataset Information</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -344,7 +344,7 @@ export default function CreateChallenge() {
           </div>
 
           {/* Additional Requirements */}
-          <div className="border-2 border-gray-600 p-6 bg-gray-900">
+          <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-xl font-semibold text-solar-gold mb-6">Additional Requirements</h3>
             
             <div className="space-y-6">
@@ -379,7 +379,7 @@ export default function CreateChallenge() {
           </div>
 
           {/* Review & Submit */}
-          <div className="border-2 border-gray-600 p-6 bg-gray-900">
+          <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-xl font-semibold text-solar-gold mb-4">Review & Submit</h3>
             <div className="bg-black border-2 border-gray-700 p-4 mb-6">
               <h4 className="text-lg font-semibold text-white mb-2">Before Submitting:</h4>
@@ -424,7 +424,7 @@ export default function CreateChallenge() {
 
         {/* Support Section */}
         <div className="mt-12 text-center">
-          <div className="border-2 border-solar-gold p-8 bg-gradient-to-r from-gray-900 to-black">
+          <div className="border-2 border-solar-gold p-8 bg-black">
             <h3 className="text-2xl font-bold text-solar-gold mb-4">Need Help Creating Your Challenge?</h3>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
               Our team is here to help you design and launch successful AI challenges. 

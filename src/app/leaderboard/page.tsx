@@ -111,22 +111,22 @@ export default function Leaderboard() {
 
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-          <div className="border-2 border-gray-600 p-6 bg-gray-900">
+          <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-solar-gold font-semibold mb-2">Total Miners</h3>
             <p className="text-3xl font-bold">2,345</p>
             <p className="text-sm text-gray-400">+234 this month</p>
           </div>
-          <div className="border-2 border-gray-600 p-6 bg-gray-900">
+          <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-solar-gold font-semibold mb-2">Active Challenges</h3>
             <p className="text-3xl font-bold">47</p>
             <p className="text-sm text-gray-400">12 ending soon</p>
           </div>
-          <div className="border-2 border-gray-600 p-6 bg-gray-900">
+          <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-solar-gold font-semibold mb-2">Total Rewards</h3>
             <p className="text-3xl font-bold">₿ 458.2</p>
             <p className="text-sm text-gray-400">₿ 23.4 this week</p>
           </div>
-          <div className="border-2 border-gray-600 p-6 bg-gray-900">
+          <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-solar-gold font-semibold mb-2">Avg Score</h3>
             <p className="text-3xl font-bold">0.9567</p>
             <p className="text-sm text-green-400">+2.3% this month</p>
@@ -136,7 +136,7 @@ export default function Leaderboard() {
         {/* Performance Graph */}
         <div className="mb-12">
           <h3 className="text-2xl font-semibold text-solar-gold mb-6">Platform Performance Trends</h3>
-          <div className="border-2 border-gray-600 p-6 bg-gray-900">
+          <div className="border-2 border-gray-600 p-6 bg-black">
             <div className="grid grid-cols-6 gap-4 h-64">
               {performanceData.map((data, index) => (
                 <div key={data.month} className="flex flex-col justify-end items-center space-y-2">
@@ -221,7 +221,7 @@ export default function Leaderboard() {
 
         {/* Call to Action */}
         <div className="mt-12 text-center">
-          <div className="border-2 border-solar-gold p-8 bg-gradient-to-r from-gray-900 to-black">
+          <div className="border-2 border-solar-gold p-8 bg-black">
             <h3 className="text-2xl font-bold text-solar-gold mb-4">Ready to Climb the Ranks?</h3>
             <p className="text-gray-300 mb-6">
               Join thousands of miners competing in AI challenges. Start earning crypto rewards today.

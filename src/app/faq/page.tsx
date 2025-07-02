@@ -159,7 +159,7 @@ export default function FAQ() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Quick Contact */}
         <div className="mb-12 text-center">
-          <div className="border-2 border-solar-gold p-6 bg-gray-900">
+          <div className="border-2 border-solar-gold p-6 bg-black">
             <h3 className="text-xl font-semibold text-solar-gold mb-3">Can't find what you're looking for?</h3>
             <p className="text-gray-300 mb-4">
               Our support team is here to help! Reach out with any questions about the platform, challenges, or technical issues.
@@ -178,7 +178,7 @@ export default function FAQ() {
         {/* FAQ Categories */}
         {faqCategories.map((category, categoryIndex) => (
           <div key={categoryIndex} className="mb-8">
-            <div className="border-2 border-gray-600 bg-gray-900">
+            <div className="border-2 border-gray-600 bg-black">
               {/* Category Header */}
               <div className="p-6 border-b border-gray-600">
                 <div className="flex items-center space-x-3">
@@ -232,7 +232,7 @@ export default function FAQ() {
         <div className="mt-16">
           <h2 className="text-2xl font-semibold text-solar-gold mb-8 text-center">Additional Resources</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="border-2 border-gray-600 p-6 bg-gray-900 text-center">
+            <div className="border-2 border-gray-600 p-6 bg-black text-center">
               <div className="text-3xl mb-4">📚</div>
               <h3 className="text-lg font-semibold text-white mb-2">Documentation</h3>
               <p className="text-gray-300 text-sm mb-4">
@@ -243,7 +243,7 @@ export default function FAQ() {
               </button>
             </div>
 
-            <div className="border-2 border-gray-600 p-6 bg-gray-900 text-center">
+            <div className="border-2 border-gray-600 p-6 bg-black text-center">
               <div className="text-3xl mb-4">🎓</div>
               <h3 className="text-lg font-semibold text-white mb-2">Tutorials</h3>
               <p className="text-gray-300 text-sm mb-4">
@@ -254,7 +254,7 @@ export default function FAQ() {
               </button>
             </div>
 
-            <div className="border-2 border-gray-600 p-6 bg-gray-900 text-center">
+            <div className="border-2 border-gray-600 p-6 bg-black text-center">
               <div className="text-3xl mb-4">💬</div>
               <h3 className="text-lg font-semibold text-white mb-2">Community</h3>
               <p className="text-gray-300 text-sm mb-4">
@@ -269,7 +269,7 @@ export default function FAQ() {
 
         {/* Call to Action */}
         <div className="mt-16 text-center">
-          <div className="border-2 border-solar-gold p-8 bg-gradient-to-r from-gray-900 to-black">
+          <div className="border-2 border-solar-gold p-8 bg-black">
             <h3 className="text-2xl font-bold text-solar-gold mb-4">Ready to Start Mining?</h3>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
               Join thousands of AI researchers and practitioners earning cryptocurrency 
