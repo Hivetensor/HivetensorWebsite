@@ -1,232 +1,291 @@
-import Link from 'next/link';
+'use client';
+
+import { useState } from 'react';
+import { ChevronDown, ChevronUp, Rocket, Trophy, DollarSign, Settings, Users, BookOpen, GraduationCap, MessageSquare } from 'lucide-react';
 
 export default function FAQ() {
-  const faqs = [
+  const [openAccordion, setOpenAccordion] = useState<number | null>(null);
+
+  const toggleAccordion = (index: number) => {
+    setOpenAccordion(openAccordion === index ? null : index);
+  };
+
+  const faqCategories = [
     {
       category: "Getting Started",
+      icon: Rocket,
       questions: [
         {
-          question: "What is AutoML mining?",
-          answer: "AutoML mining is a competitive system where participants (miners) solve machine learning challenges using automated ML tools. Winners earn cryptocurrency rewards based on their model's performance relative to other participants."
+          question: "What is Hivetensor?",
+          answer: "Hivetensor is a decentralized platform that combines artificial intelligence competitions with cryptocurrency rewards. Think of it as 'Kaggle meets Cryptocurrency' - miners compete to solve real-world AI challenges and earn Bitcoin for their contributions. We're democratizing AI development by creating a global, permissionless network of machine learning researchers and practitioners."
         },
         {
-          question: "Do I need machine learning expertise to participate?",
-          answer: "While some ML knowledge helps, AutoML tools are designed to make machine learning accessible. The automated tools handle most of the complex model selection and hyperparameter tuning, so you can focus on understanding the problem and data."
+          question: "How do I get started mining on Hivetensor?",
+          answer: "Getting started is simple: 1) Download the Hivetensor client from our docs page, 2) Create your miner account and set up your wallet, 3) Browse active challenges and pick ones that match your skills, 4) Submit your solutions and compete for rewards. No special hardware required beyond a decent computer - though GPU access helps for deep learning challenges."
         },
         {
-          question: "What equipment do I need to start mining?",
-          answer: "For most challenges, a standard computer with internet access is sufficient. Some advanced challenges may benefit from GPUs, but we provide cloud compute credits for resource-intensive tasks."
+          question: "Do I need to be an AI expert to participate?",
+          answer: "Not at all! We have challenges for every skill level. Beginner challenges might involve basic data analysis or simple machine learning tasks, while expert challenges tackle cutting-edge research problems. Our tutorials and bootcamp materials help you level up your skills progressively."
         },
         {
-          question: "How do I connect my crypto wallet?",
-          answer: "We support MetaMask, WalletConnect, and other popular Ethereum wallets. Simply click 'Connect Wallet' in the top navigation to link your account and start earning rewards."
+          question: "What hardware do I need?",
+          answer: "For most challenges, a standard laptop or desktop computer is sufficient. However, deep learning challenges may benefit from GPU acceleration. We recommend at least 8GB RAM and a modern CPU. Cloud computing resources like Google Colab or AWS can also be used for more demanding tasks."
         }
       ]
     },
     {
       category: "Challenges & Competition",
+      icon: Trophy,
       questions: [
         {
-          question: "How are challenges created and vetted?",
-          answer: "Challenge creators submit proposals with datasets, problem descriptions, and reward pools. Our team reviews each submission for data quality, problem clarity, and feasibility before publishing."
+          question: "How are challenges evaluated?",
+          answer: "Each challenge specifies its evaluation metric (accuracy, F1-score, BLEU, etc.) and validation process. Solutions are typically evaluated on a held-out test set that participants can't access. Rankings are updated in real-time, and final rewards are distributed based on leaderboard positions when the challenge ends."
         },
         {
-          question: "What types of ML problems are featured?",
-          answer: "We host challenges across classification, regression, computer vision, NLP, time series forecasting, and specialized domains like bioinformatics and finance."
+          question: "Can I submit multiple solutions to the same challenge?",
+          answer: "Yes! You can submit multiple solutions to improve your score. However, there may be daily submission limits to prevent spam. Your best score is what counts for the final ranking. We encourage iterative improvement and learning from feedback."
         },
         {
-          question: "How long do challenges typically run?",
-          answer: "Challenge duration varies from 3 days for quick competitions to 30 days for complex problems. Each challenge page shows the exact deadline and remaining time."
+          question: "What types of AI challenges are available?",
+          answer: "We host challenges across all major AI domains: Computer Vision (image classification, object detection), Natural Language Processing (sentiment analysis, translation), Time Series (forecasting, anomaly detection), Reinforcement Learning (game playing, robotics), and more. Challenges range from academic research problems to real-world industry applications."
         },
         {
-          question: "Can I participate in multiple challenges simultaneously?",
-          answer: "Absolutely! There's no limit to how many active challenges you can join. Many miners work on multiple problems to maximize their earning potential."
-        },
-        {
-          question: "What happens if I submit multiple solutions?",
-          answer: "You can submit as many solutions as you want during the competition period. Only your best-performing submission counts toward final rankings and rewards."
-        }
-      ]
-    },
-    {
-      category: "Rewards & Payouts",
-      questions: [
-        {
-          question: "How are rewards calculated and distributed?",
-          answer: "Rewards are distributed based on final leaderboard rankings. Typically, the top 10-20% of performers split the reward pool, with larger shares going to higher-ranked solutions."
-        },
-        {
-          question: "What happens to rewards from unsolved challenges?",
-          answer: "If no solution meets the target accuracy threshold, the reward amount goes into our jackpot pool. This creates larger prizes for future challenges and adds excitement to difficult problems."
-        },
-        {
-          question: "When do I receive my rewards?",
-          answer: "Rewards are automatically distributed to your connected wallet within 24 hours of challenge completion. You'll receive a notification when payment is processed."
-        },
-        {
-          question: "Are there any fees or platform charges?",
-          answer: "We charge a small platform fee (typically 5-10%) to maintain infrastructure and support challenge creation. This is clearly disclosed before you join any challenge."
-        },
-        {
-          question: "Can I withdraw my earnings immediately?",
-          answer: "Yes, rewards are paid directly to your wallet and are immediately available for withdrawal or trading. We don&apos;t hold funds or require minimum withdrawal amounts."
-        }
-      ]
-    },
-    {
-      category: "Technical & Platform",
-      questions: [
-        {
-          question: "What AutoML tools and frameworks are supported?",
-          answer: "We support popular AutoML libraries including Auto-sklearn, TPOT, H2O AutoML, AutoKeras, and Google Cloud AutoML. You can also use custom approaches as long as they meet submission requirements."
-        },
-        {
-          question: "How are model submissions evaluated?",
-          answer: "Models are evaluated on held-out test datasets using metrics specified in each challenge (accuracy, F1-score, RMSE, etc.). Evaluation is automated and results appear on leaderboards in real-time."
-        },
-        {
-          question: "Is my code and data secure?",
-          answer: "We use enterprise-grade security with encrypted data transmission and storage. Your submitted models are kept confidential, and we never share proprietary code or techniques."
-        },
-        {
-          question: "What if I encounter technical issues during a challenge?",
-          answer: "Our support team is available 24/7 via Discord and email. We also maintain detailed documentation and tutorials for common issues and best practices."
+          question: "How are prize pools determined?",
+          answer: "Prize pools are set by challenge sponsors - companies, research institutions, or individuals who want to crowdsource AI solutions. Larger, more complex challenges typically have higher rewards. The total pool is distributed among top performers, with the exact distribution specified for each challenge."
         },
         {
           question: "Can I collaborate with other miners?",
-          answer: "Team competitions are allowed for designated challenges. Solo challenges require individual submissions, but you're welcome to discuss general approaches in our community forums."
+          answer: "This depends on the specific challenge rules. Some challenges allow team submissions, while others require individual work. Check each challenge's terms carefully. However, general discussion and knowledge sharing in our community forums is always encouraged!"
         }
       ]
     },
     {
-      category: "Community & Growth",
+      category: "Rewards & Payments",
+      icon: DollarSign,
       questions: [
         {
-          question: "How can I improve my mining skills?",
-          answer: "We offer an AutoML Bootcamp, community workshops, and mentorship programs. Many top miners also share insights in our Discord and blog posts."
+          question: "How do I earn cryptocurrency rewards?",
+          answer: "Rewards are earned by ranking highly in challenge leaderboards. The exact payout structure is specified for each challenge, but typically the top 10-20% of participants receive rewards proportional to their ranking. Payments are made in Bitcoin automatically after challenge completion."
         },
         {
-          question: "Are there beginner-friendly challenges?",
-          answer: "Yes! We mark challenges by difficulty level and regularly host 'Rookie Leagues' with smaller datasets and extended timelines for newcomers to learn."
+          question: "When do I receive my rewards?",
+          answer: "Rewards are typically distributed within 48 hours of challenge completion, after final verification and fraud checks. You'll need to provide a valid Bitcoin wallet address in your profile to receive payments. All transactions are recorded on the blockchain for transparency."
         },
         {
-          question: "How do I create my own challenges?",
-          answer: "Visit our 'Create Challenge' page to submit your problem, dataset, and proposed rewards. Our team will review and help optimize your challenge for maximum participation."
+          question: "Are there minimum payout thresholds?",
+          answer: "Yes, to minimize transaction fees, there's a minimum payout threshold of 0.001 BTC (approximately $30-50 depending on current prices). Smaller rewards accumulate in your account until you reach the threshold. You can view your current balance in your miner dashboard."
         },
         {
-          question: "Is there a mobile app?",
-          answer: "Currently we're web-based, but our platform is fully responsive on mobile devices. A dedicated mobile app is planned for 2025 with push notifications and mobile-optimized features."
+          question: "How are taxes handled?",
+          answer: "Hivetensor does not provide tax advice. Cryptocurrency earnings may be subject to taxation in your jurisdiction. You're responsible for reporting earnings according to your local tax laws. We recommend consulting with a tax professional familiar with cryptocurrency regulations."
+        },
+        {
+          question: "What happens if there are technical issues or disputes?",
+          answer: "We have a dispute resolution process for technical issues, evaluation errors, or suspected cheating. Contact our support team with detailed information. In cases of platform errors, affected participants will be compensated fairly. Serious violations like data leakage or cheating result in disqualification and potential bans."
+        }
+      ]
+    },
+    {
+      category: "Technical Details",
+      icon: Settings,
+      questions: [
+        {
+          question: "What programming languages and frameworks can I use?",
+          answer: "You're free to use any programming language and framework you prefer! Python with scikit-learn, TensorFlow, and PyTorch are most common, but R, Julia, C++, and others are welcome. What matters is the quality of your solution, not the tools you use to build it."
+        },
+        {
+          question: "How do I submit my solutions?",
+          answer: "Solutions are submitted through the Hivetensor client application. You'll typically upload prediction files, model outputs, or complete model implementations depending on the challenge requirements. Each challenge provides clear submission guidelines and file format specifications."
+        },
+        {
+          question: "Can I use pre-trained models and external data?",
+          answer: "This varies by challenge. Some allow pre-trained models and external datasets, while others restrict participants to provided data only. Always check the specific rules for each challenge. Using prohibited resources can result in disqualification."
+        },
+        {
+          question: "How is the platform secured against cheating?",
+          answer: "We employ multiple anti-cheating measures: held-out test sets that participants can't access, submission limits, plagiarism detection, anomaly detection in results, and community reporting. Serious violations result in immediate disqualification and potential permanent bans."
+        },
+        {
+          question: "Is my code and intellectual property protected?",
+          answer: "You retain ownership of your code and models. However, by participating, you grant Hivetensor limited rights to evaluate your submissions. We never share your code with others unless explicitly required by challenge rules. Some challenges may require open-source solutions - this is always clearly stated upfront."
+        }
+      ]
+    },
+    {
+      category: "Community & Support",
+      icon: Users,
+      questions: [
+        {
+          question: "How can I get help if I'm stuck?",
+          answer: "We have multiple support channels: comprehensive documentation, video tutorials, community forums where experienced miners help newcomers, and direct support via email. Our community is generally very helpful and welcoming to new participants."
+        },
+        {
+          question: "Are there educational resources available?",
+          answer: "Absolutely! We offer a complete AutoML bootcamp curriculum, covering everything from basic machine learning to advanced techniques. There are also challenge-specific tutorials, best practices guides, and regular webinars from top performers sharing their strategies."
+        },
+        {
+          question: "Can I create my own challenges?",
+          answer: "Yes! Organizations and individuals can sponsor their own challenges through our challenge creation platform. You define the problem, provide the dataset, set the prize pool, and we handle the infrastructure and community engagement. It's a great way to crowdsource solutions to your specific AI problems."
+        },
+        {
+          question: "How do I stay updated on new challenges and platform updates?",
+          answer: "Follow us on Twitter @GPLv6, join our community forums, or enable notifications in the Hivetensor client. We announce new challenges, platform updates, and important news through these channels. You can also customize your notification preferences for challenges in specific domains."
+        },
+        {
+          question: "Is there a referral or affiliate program?",
+          answer: "Yes! You can earn bonuses for referring new miners who successfully complete challenges. Additionally, top community contributors, tutorial creators, and active forum helpers may be eligible for special rewards and recognition. We believe in rewarding those who help grow and support our community."
         }
       ]
     }
   ];
 
   return (
-    <>
-      {/* Navigation */}
-      <nav>
-        <Link href="/" className="logo">
-          <span className="hex"></span>
-          HIVETENSOR
-        </Link>
-        <div className="nav-links">
-          <Link href="/#how-it-works">How It Works</Link>
-          <Link href="/challenges">Challenges</Link>
-          <Link href="/leaderboard">Leaderboard</Link>
-          <Link href="/create">Create Challenge</Link>
-          <Link href="/faq">FAQ</Link>
-        </div>
-      </nav>
-
-      {/* Page Header */}
-      <header className="page-header">
-        <div className="wrapper">
-          <h1>Frequently Asked Questions</h1>
-          <p>Everything you need to know about AutoML mining</p>
-        </div>
-      </header>
-
-      {/* FAQ Content */}
-      <section className="faq-content">
-        <div className="wrapper">
-          {faqs.map((category, categoryIndex) => (
-            <div key={categoryIndex} className="faq-category">
-              <h2 className="category-title">{category.category}</h2>
-              <div className="faq-items">
-                {category.questions.map((faq, faqIndex) => (
-                  <div key={faqIndex} className="faq-item">
-                    <h3 className="faq-question">{faq.question}</h3>
-                    <p className="faq-answer">{faq.answer}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="faq-cta">
-        <div className="wrapper">
-          <h2>Still Have Questions?</h2>
-          <p>Join our community or contact our support team</p>
-          <div className="cta-buttons">
-            <a href="#" className="btn primary">Join Discord</a>
-            <a href="#" className="btn">Contact Support</a>
+    <main className="min-h-screen bg-black text-white">
+      {/* Header */}
+      <div className="border-b border-solar-gold bg-gradient-to-r from-black to-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-solar-gold mb-4">
+              FREQUENTLY ASKED QUESTIONS
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Everything you need to know about Hivetensor, from getting started 
+              to earning your first cryptocurrency rewards through AI competition.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Footer */}
-      <footer className="main-footer">
-        <div className="wrapper">
-          <div className="footer-content">
-            <div className="footer-section">
-              <h4>Platform</h4>
-              <ul>
-                <li><Link href="/challenges">Browse Challenges</Link></li>
-                <li><Link href="/create">Create Challenge</Link></li>
-                <li><Link href="/leaderboard">Leaderboard</Link></li>
-                <li><Link href="/faq">FAQ</Link></li>
-              </ul>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Quick Contact */}
+        <div className="mb-12 text-center">
+          <div className="border-2 border-solar-gold p-6 bg-black">
+            <h3 className="text-xl font-semibold text-solar-gold mb-3">Can't find what you're looking for?</h3>
+            <p className="text-gray-300 mb-4">
+              Our support team is here to help! Reach out with any questions about the platform, challenges, or technical issues.
+            </p>
+            <div className="space-x-4">
+              <button className="bg-solar-gold text-black px-6 py-2 font-bold border-2 border-solar-gold hover:bg-black hover:text-solar-gold transition-all duration-300">
+                CONTACT SUPPORT
+              </button>
+              <button className="border-2 border-solar-gold text-solar-gold px-6 py-2 font-bold hover:bg-solar-gold hover:text-black transition-all duration-300">
+                JOIN COMMUNITY
+              </button>
             </div>
-            <div className="footer-section">
-              <h4>Company</h4>
-              <ul>
-                <li><Link href="/about">About</Link></li>
-                <li><Link href="/careers">Careers</Link></li>
-                <li><Link href="/blog">Blog</Link></li>
-                <li><Link href="/contact">Contact</Link></li>
-              </ul>
-            </div>
-            <div className="footer-section">
-              <h4>Resources</h4>
-              <ul>
-                <li><Link href="/docs">Documentation</Link></li>
-                <li><Link href="/api">API</Link></li>
-                <li><Link href="/tutorials">Tutorials</Link></li>
-                <li><Link href="/syllabus">AutoML Bootcamp</Link></li>
-              </ul>
-            </div>
-            <div className="footer-section">
-              <h4>Connect</h4>
-              <div className="social-links">
-                <a href="#" aria-label="Twitter">𝕏</a>
-                <a href="#" aria-label="Discord">DC</a>
-                <a href="#" aria-label="GitHub">GH</a>
-                <a href="#" aria-label="Telegram">TG</a>
+          </div>
+        </div>
+
+        {/* FAQ Categories */}
+        {faqCategories.map((category, categoryIndex) => (
+          <div key={categoryIndex} className="mb-8">
+            <div className="border-2 border-gray-600 bg-black">
+              {/* Category Header */}
+              <div className="p-6 border-b border-gray-600">
+                <div className="flex items-center space-x-3">
+                  <category.icon className="w-6 h-6 text-solar-gold" />
+                  <h2 className="text-2xl font-semibold text-solar-gold">{category.category}</h2>
+                </div>
+              </div>
+
+              {/* Questions */}
+              <div className="divide-y divide-gray-600">
+                {category.questions.map((faq, questionIndex) => {
+                  const globalIndex = categoryIndex * 100 + questionIndex; // Create unique index
+                  const isOpen = openAccordion === globalIndex;
+                  
+                  return (
+                    <div key={questionIndex}>
+                      <button
+                        onClick={() => toggleAccordion(globalIndex)}
+                        className="w-full p-6 text-left hover:bg-gray-800 transition-colors duration-200 flex justify-between items-center"
+                      >
+                        <span className="text-lg font-medium text-white pr-4">
+                          {faq.question}
+                        </span>
+                        <div className="flex-shrink-0 text-solar-gold">
+                          {isOpen ? (
+                            <ChevronUp className="w-5 h-5" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5" />
+                          )}
+                        </div>
+                      </button>
+                      
+                      {isOpen && (
+                        <div className="px-6 pb-6 bg-black">
+                          <div className="border-l-4 border-solar-gold pl-4">
+                            <p className="text-gray-300 leading-relaxed">
+                              {faq.answer}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
-          <div className="footer-bottom">
-            <p>© 2025 Hivetensor • Democratizing AutoML through competition</p>
-            <div className="footer-links">
-              <Link href="/privacy">Privacy</Link>
-              <Link href="/terms">Terms</Link>
+        ))}
+
+        {/* Additional Resources */}
+        <div className="mt-16">
+          <h2 className="text-2xl font-semibold text-solar-gold mb-8 text-center">Additional Resources</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="border-2 border-gray-600 p-6 bg-black text-center">
+              <BookOpen className="w-8 h-8 text-solar-gold mb-4 mx-auto" />
+              <h3 className="text-lg font-semibold text-white mb-2">Documentation</h3>
+              <p className="text-gray-300 text-sm mb-4">
+                Comprehensive guides, API references, and technical documentation.
+              </p>
+              <button className="border-2 border-solar-gold text-solar-gold px-4 py-2 font-bold hover:bg-solar-gold hover:text-black transition-all duration-300">
+                VIEW DOCS
+              </button>
+            </div>
+
+            <div className="border-2 border-gray-600 p-6 bg-black text-center">
+              <GraduationCap className="w-8 h-8 text-solar-gold mb-4 mx-auto" />
+              <h3 className="text-lg font-semibold text-white mb-2">Tutorials</h3>
+              <p className="text-gray-300 text-sm mb-4">
+                Step-by-step tutorials and our complete AutoML bootcamp curriculum.
+              </p>
+              <button className="border-2 border-solar-gold text-solar-gold px-4 py-2 font-bold hover:bg-solar-gold hover:text-black transition-all duration-300">
+                START LEARNING
+              </button>
+            </div>
+
+            <div className="border-2 border-gray-600 p-6 bg-black text-center">
+              <MessageSquare className="w-8 h-8 text-solar-gold mb-4 mx-auto" />
+              <h3 className="text-lg font-semibold text-white mb-2">Community</h3>
+              <p className="text-gray-300 text-sm mb-4">
+                Connect with other miners, share strategies, and get help from experts.
+              </p>
+              <button className="border-2 border-gray-600 text-gray-300 px-4 py-2 font-bold hover:bg-solar-gold hover:text-black transition-all duration-300">
+                JOIN FORUM
+              </button>
             </div>
           </div>
         </div>
-      </footer>
-    </>
+
+        {/* Call to Action */}
+        <div className="mt-16 text-center">
+          <div className="border-2 border-solar-gold p-8 bg-black">
+            <h3 className="text-2xl font-bold text-solar-gold mb-4">Ready to Start Mining?</h3>
+            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+              Join thousands of AI researchers and practitioners earning cryptocurrency 
+              rewards while solving real-world problems.
+            </p>
+            <div className="space-x-4">
+              <button className="bg-solar-gold text-black px-8 py-3 font-bold border-2 border-solar-gold hover:bg-black hover:text-solar-gold transition-all duration-300">
+                START MINING
+              </button>
+              <button className="border-2 border-solar-gold text-solar-gold px-8 py-3 font-bold hover:bg-solar-gold hover:text-black transition-all duration-300">
+                VIEW CHALLENGES
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 } 
