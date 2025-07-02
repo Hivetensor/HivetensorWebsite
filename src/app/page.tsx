@@ -22,29 +22,31 @@ export default function HomePage() {
       {/* Navigation */}
       <nav className="border-b border-white/20 bg-black/95 backdrop-blur-sm fixed w-full z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center font-bold text-xl text-yellow-500 hover:text-yellow-400 transition-colors">
+          <Link href="/" className="flex items-center font-bold text-xl text-solar-gold hover:text-solar-amber transition-colors">
             <span className="hex"></span>
             HIVETENSOR
           </Link>
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/#how-it-works" className="text-white/80 hover:text-yellow-500 transition-colors">How This Works</Link>
-            <Link href="/challenges" className="text-white/80 hover:text-yellow-500 transition-colors">Challenges</Link>
-            <Link href="/leaderboard" className="text-white/80 hover:text-yellow-500 transition-colors">Leaderboard</Link>
-            <Link href="/create" className="text-white/80 hover:text-yellow-500 transition-colors">Create Challenge</Link>
-            <Link href="/faq" className="text-white/80 hover:text-yellow-500 transition-colors">FAQ</Link>
+            <Link href="/#how-it-works" className="text-white/80 hover:text-solar-gold transition-colors">How This Works</Link>
+            <Link href="/challenges" className="text-white/80 hover:text-solar-gold transition-colors">Challenges</Link>
+            <Link href="/leaderboard" className="text-white/80 hover:text-solar-gold transition-colors">Leaderboard</Link>
+            <Link href="/create" className="text-white/80 hover:text-solar-gold transition-colors">Create Challenge</Link>
+            <Link href="/faq" className="text-white/80 hover:text-solar-gold transition-colors">FAQ</Link>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
       <section className="pt-24 pb-16 px-4 sm:px-6 relative overflow-hidden bg-black">
-        {/* Background Effects */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-yellow-500/5 rounded-full blur-3xl"></div>
+        {/* Hexagonal Swarm Background */}
+        <div className="absolute inset-0 hex-swarm pointer-events-none"></div>
+        {/* Solar Gradient Effects */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl" style={{background: 'rgba(255, 155, 5, 0.15)'}}></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl" style={{background: 'rgba(255, 155, 5, 0.1)'}}></div>
         
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 text-yellow-500 tracking-tight leading-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight leading-tight" style={{color: 'var(--solar-gold)', textShadow: '0 0 18px rgba(255, 155, 5, 0.35)'}}>
               AutoML
               <br />
               <span className="text-white">Mining Pool</span>
@@ -52,7 +54,7 @@ export default function HomePage() {
             <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed mb-8">
               Compete in decentralized AutoML challenges. Earn crypto rewards. 
               <br className="hidden sm:block" />
-              <span className="text-yellow-500 font-semibold">Build the future of AI together.</span>
+              <span className="font-semibold" style={{color: 'var(--solar-gold)'}}>Build the future of AI together.</span>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
               <Link href="/challenges" className="btn btn-primary inline-flex items-center justify-center gap-2 flex-1">
@@ -69,15 +71,15 @@ export default function HomePage() {
           {/* Live Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-16 max-w-4xl mx-auto">
             <div className="bg-white/5 border border-white/20 p-6 text-center backdrop-blur-sm">
-              <div className="text-2xl sm:text-3xl font-bold text-yellow-500 mb-2">$127,450</div>
+              <div className="text-2xl sm:text-3xl font-bold mb-2" style={{color: 'var(--solar-gold)'}}>$127,450</div>
               <div className="text-white/70 text-xs sm:text-sm uppercase tracking-wider">Total Jackpot</div>
             </div>
             <div className="bg-white/5 border border-white/20 p-6 text-center backdrop-blur-sm">
-              <div className="text-2xl sm:text-3xl font-bold text-yellow-500 mb-2">2,847</div>
+              <div className="text-2xl sm:text-3xl font-bold mb-2" style={{color: 'var(--solar-gold)'}}>2,847</div>
               <div className="text-white/70 text-xs sm:text-sm uppercase tracking-wider">Active Miners</div>
             </div>
             <div className="bg-white/5 border border-white/20 p-6 text-center backdrop-blur-sm">
-              <div className="text-2xl sm:text-3xl font-bold text-yellow-500 mb-2">156</div>
+              <div className="text-2xl sm:text-3xl font-bold mb-2" style={{color: 'var(--solar-gold)'}}>156</div>
               <div className="text-white/70 text-xs sm:text-sm uppercase tracking-wider">Live Challenges</div>
             </div>
           </div>

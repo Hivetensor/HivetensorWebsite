@@ -1,9 +1,72 @@
 @import "tailwindcss";
 
+/*================================================================
+  CORE PALETTE – solar‑brutalist spectrum  
+=================================================================*/
+:root {
+  /* Infernal sun‑core - matching original design */
+  --solar-gold: #ffbe0b;
+  --solar-amber: #ff9b05;
+  /* basalt */
+  --abyss-black: #000000;
+  /* supportive greys */
+  --obsidian-800: #0d0d0d;
+  --obsidian-700: #161616;
+}
+
+/*================================================================
+  BUTTONS – brutalist blocks with sliding hover effect
+=================================================================*/
+.btn {
+  font-family: 'Space Mono', monospace; 
+  font-weight: 700; 
+  text-transform: uppercase;
+  padding: 1rem 2rem; 
+  border: 2px solid var(--solar-gold); 
+  cursor: pointer;
+  background: transparent; 
+  color: var(--solar-gold); 
+  position: relative; 
+  overflow: hidden;
+  transition: color 0.25s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: var(--solar-gold); 
+  color: var(--abyss-black);
+}
+
+.btn::after {
+  content: ""; 
+  position: absolute; 
+  inset: 0; 
+  background: var(--solar-amber);
+  transform: translateX(-100%); 
+  transition: transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+  z-index: -1;
+}
+
+.btn:hover::after {
+  transform: translateX(0);
+}
+
+.btn:hover {
+  color: var(--abyss-black);
+  border-color: var(--solar-amber);
+}
+
+.btn-primary:hover {
+  color: var(--abyss-black);
+}
+
 /* Essential custom animations */
 @keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(235, 183, 82, 0.3); }
-  50% { box-shadow: 0 0 30px rgba(235, 183, 82, 0.6); }
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 190, 11, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(255, 190, 11, 0.6); }
 }
 
 @keyframes rotate {
@@ -31,4 +94,77 @@
 /* Ensure pure black backgrounds */
 body {
   @apply bg-black;
+}
+
+/* Hexagonal logo */
+.hex {
+  width: 32px; 
+  aspect-ratio: 1/1; 
+  background: var(--solar-gold);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  margin-right: 0.5rem;
+}
+
+/* Hex background pattern for hero section */
+.hex-swarm {
+  background-image: repeating-linear-gradient(
+    60deg,
+    transparent 0 80px,
+    rgba(255, 190, 11, 0.05) 80px 82px
+  ),
+  repeating-linear-gradient(
+    -60deg,
+    transparent 0 80px,
+    rgba(255, 190, 11, 0.05) 80px 82px
+  );
+  background-size: 160px 140px;
+  animation: drift 40s linear infinite;
+  opacity: 0.45;
+}
+
+@keyframes drift { 
+  to {
+    background-position: -1000px 600px, 1000px -600px;
+  } 
+}
+
+/*================================================================
+  CUSTOM TAILWIND UTILITIES – Solar Color System
+=================================================================*/
+@layer utilities {
+  .text-solar-gold {
+    color: var(--solar-gold);
+  }
+  
+  .text-solar-amber {
+    color: var(--solar-amber);
+  }
+  
+  .bg-solar-gold {
+    background-color: var(--solar-gold);
+  }
+  
+  .bg-solar-amber {
+    background-color: var(--solar-amber);
+  }
+  
+  .border-solar-gold {
+    border-color: var(--solar-gold);
+  }
+  
+  .border-solar-amber {
+    border-color: var(--solar-amber);
+  }
+  
+  .hover\:text-solar-gold:hover {
+    color: var(--solar-gold);
+  }
+  
+  .hover\:text-solar-amber:hover {
+    color: var(--solar-amber);
+  }
+  
+  .hover\:border-solar-gold:hover {
+    border-color: var(--solar-gold);
+  }
 }
