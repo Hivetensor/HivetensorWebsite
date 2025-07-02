@@ -329,43 +329,38 @@ export default function HomePage() {
             <div>
               <h4 className="text-lg font-bold text-white mb-4">Platform</h4>
               <ul className="space-y-2">
-                <li><Link href="/challenges" className="text-white/70 hover:text-yellow-500 transition-colors">Browse Challenges</Link></li>
-                <li><Link href="/create" className="text-white/70 hover:text-yellow-500 transition-colors">Create Challenge</Link></li>
-                <li><Link href="/leaderboard" className="text-white/70 hover:text-yellow-500 transition-colors">Leaderboard</Link></li>
-                <li><Link href="/faq" className="text-white/70 hover:text-yellow-500 transition-colors">FAQ</Link></li>
+                <li><Link href="/challenges" className="text-white/70 hover:text-solar-gold transition-colors">Browse Challenges</Link></li>
+                <li><Link href="/create" className="text-white/70 hover:text-solar-gold transition-colors">Create Challenge</Link></li>
+                <li><Link href="/leaderboard" className="text-white/70 hover:text-solar-gold transition-colors">Leaderboard</Link></li>
+                <li><Link href="/faq" className="text-white/70 hover:text-solar-gold transition-colors">FAQ</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="text-lg font-bold text-white mb-4">Company</h4>
               <ul className="space-y-2">
-                <li><Link href="/about" className="text-white/70 hover:text-yellow-500 transition-colors">About</Link></li>
-                <li><Link href="/careers" className="text-white/70 hover:text-yellow-500 transition-colors">Careers</Link></li>
-                <li><Link href="/blog" className="text-white/70 hover:text-yellow-500 transition-colors">Blog</Link></li>
-                <li><Link href="/contact" className="text-white/70 hover:text-yellow-500 transition-colors">Contact</Link></li>
+                <li><Link href="/about" className="text-white/70 hover:text-solar-gold transition-colors">About</Link></li>
+                <li><Link href="/careers" className="text-white/70 hover:text-solar-gold transition-colors">Careers</Link></li>
+                <li><Link href="/contact" className="text-white/70 hover:text-solar-gold transition-colors">Contact</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="text-lg font-bold text-white mb-4">Resources</h4>
               <ul className="space-y-2">
-                <li><Link href="/docs" className="text-white/70 hover:text-yellow-500 transition-colors">Documentation</Link></li>
-                <li><Link href="/api" className="text-white/70 hover:text-yellow-500 transition-colors">API</Link></li>
-                <li><Link href="/tutorials" className="text-white/70 hover:text-yellow-500 transition-colors">Tutorials</Link></li>
-                <li><Link href="/syllabus" className="text-white/70 hover:text-yellow-500 transition-colors">AutoML Bootcamp</Link></li>
+                <li><Link href="/docs" className="text-white/70 hover:text-solar-gold transition-colors">Documentation</Link></li>
+                <li><Link href="/tutorials" className="text-white/70 hover:text-solar-gold transition-colors">Tutorials</Link></li>
+                <li><Link href="/syllabus" className="text-white/70 hover:text-solar-gold transition-colors">AutoML Bootcamp</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="text-lg font-bold text-white mb-4">Connect</h4>
               <div className="flex gap-3">
-                <a href="#" className="w-10 h-10 bg-white/5 border border-white/20 rounded-lg flex items-center justify-center text-white/70 hover:text-yellow-500 hover:border-yellow-500/50 transition-all hover:-translate-y-0.5">
+                <a href="https://x.com/GPLv6" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/5 border border-white/20 rounded-lg flex items-center justify-center text-white/70 hover:text-solar-gold hover:border-solar-gold/50 transition-all hover:-translate-y-0.5">
                   <Twitter className="w-4 h-4" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-white/5 border border-white/20 rounded-lg flex items-center justify-center text-white/70 hover:text-yellow-500 hover:border-yellow-500/50 transition-all hover:-translate-y-0.5">
-                  <MessageCircle className="w-4 h-4" />
-                </a>
-                <a href="#" className="w-10 h-10 bg-white/5 border border-white/20 rounded-lg flex items-center justify-center text-white/70 hover:text-yellow-500 hover:border-yellow-500/50 transition-all hover:-translate-y-0.5">
+                <a href="https://github.com/Hivetensor" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/5 border border-white/20 rounded-lg flex items-center justify-center text-white/70 hover:text-solar-gold hover:border-solar-gold/50 transition-all hover:-translate-y-0.5">
                   <Github className="w-4 h-4" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-white/5 border border-white/20 rounded-lg flex items-center justify-center text-white/70 hover:text-yellow-500 hover:border-yellow-500/50 transition-all hover:-translate-y-0.5">
+                <a href="mailto:ali@hivetensor.com" className="w-10 h-10 bg-white/5 border border-white/20 rounded-lg flex items-center justify-center text-white/70 hover:text-solar-gold hover:border-solar-gold/50 transition-all hover:-translate-y-0.5">
                   <Send className="w-4 h-4" />
                 </a>
               </div>
@@ -374,8 +369,8 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/20">
             <p className="text-white/60 text-sm mb-4 md:mb-0">© 2025 Hivetensor • Democratizing AutoML through competition</p>
             <div className="flex gap-6">
-              <Link href="/privacy" className="text-white/60 hover:text-yellow-500 text-sm transition-colors">Privacy</Link>
-              <Link href="/terms" className="text-white/60 hover:text-yellow-500 text-sm transition-colors">Terms</Link>
+              <Link href="/privacy" className="text-white/60 hover:text-solar-gold text-sm transition-colors">Privacy</Link>
+              <Link href="/terms" className="text-white/60 hover:text-solar-gold text-sm transition-colors">Terms</Link>
             </div>
           </div>
         </div>
