@@ -15,11 +15,20 @@
 }
 
 /*================================================================
+  TYPOGRAPHY SYSTEM
+=================================================================*/
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+/*================================================================
   BUTTONS – brutalist blocks with sliding hover effect
 =================================================================*/
 .btn {
-  font-family: 'Space Mono', monospace; 
-  font-weight: 700; 
+  font-family: 'JetBrains Mono', 'Menlo', 'Monaco', monospace; 
+  font-weight: 500; 
   text-transform: uppercase;
   padding: 1rem 2rem; 
   border: 2px solid var(--solar-gold); 
@@ -94,6 +103,7 @@
 /* Ensure pure black backgrounds */
 body {
   @apply bg-black;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* Hexagonal logo */
