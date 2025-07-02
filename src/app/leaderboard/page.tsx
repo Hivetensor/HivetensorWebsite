@@ -1,18 +1,19 @@
 'use client';
 
 import { useState } from 'react';
+import { Trophy, Eye, FileText, Gamepad2, TrendingUp, BarChart3 } from 'lucide-react';
 
 export default function Leaderboard() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [timeframe, setTimeframe] = useState('all-time');
 
   const categories = [
-    { id: 'all', name: 'All Challenges', icon: '🏆' },
-    { id: 'computer-vision', name: 'Computer Vision', icon: '👁️' },
-    { id: 'nlp', name: 'Natural Language', icon: '📝' },
-    { id: 'reinforcement', name: 'Reinforcement Learning', icon: '🎮' },
-    { id: 'time-series', name: 'Time Series', icon: '📈' },
-    { id: 'tabular', name: 'Tabular Data', icon: '📊' },
+    { id: 'all', name: 'All Challenges', icon: Trophy },
+    { id: 'computer-vision', name: 'Computer Vision', icon: Eye },
+    { id: 'nlp', name: 'Natural Language', icon: FileText },
+    { id: 'reinforcement', name: 'Reinforcement Learning', icon: Gamepad2 },
+    { id: 'time-series', name: 'Time Series', icon: TrendingUp },
+    { id: 'tabular', name: 'Tabular Data', icon: BarChart3 },
   ];
 
   const timeframes = [
@@ -81,7 +82,7 @@ export default function Leaderboard() {
                   }`}
                 >
                   <div className="flex flex-col items-center space-y-1">
-                    <span className="text-lg">{category.icon}</span>
+                    <category.icon className="w-5 h-5" />
                     <span>{category.name}</span>
                   </div>
                 </button>
@@ -207,8 +208,12 @@ export default function Leaderboard() {
                         <div className="text-green-400 font-mono">{miner.trend}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-gray-400 capitalize">
-                          {categories.find(c => c.id === miner.category)?.icon} {miner.category.replace('-', ' ')}
+                        <div className="text-gray-400 capitalize flex items-center space-x-2">
+                          {(() => {
+                            const CategoryIcon = categories.find(c => c.id === miner.category)?.icon;
+                            return CategoryIcon ? <CategoryIcon className="w-4 h-4" /> : null;
+                          })()}
+                          <span>{miner.category.replace('-', ' ')}</span>
                         </div>
                       </td>
                     </tr>

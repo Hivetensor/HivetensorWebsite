@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Brain, Globe, Gem, Eye, FileText, Gamepad2, TrendingUp, BarChart3, Palette, Mic, Bot } from 'lucide-react';
 
 export default function CreateChallenge() {
   const [formData, setFormData] = useState({
@@ -22,14 +23,14 @@ export default function CreateChallenge() {
   });
 
   const categories = [
-    { id: 'computer-vision', name: 'Computer Vision', icon: '👁️' },
-    { id: 'nlp', name: 'Natural Language Processing', icon: '📝' },
-    { id: 'reinforcement', name: 'Reinforcement Learning', icon: '🎮' },
-    { id: 'time-series', name: 'Time Series Analysis', icon: '📈' },
-    { id: 'tabular', name: 'Tabular Data', icon: '📊' },
-    { id: 'generative', name: 'Generative AI', icon: '🎨' },
-    { id: 'speech', name: 'Speech Recognition', icon: '🎤' },
-    { id: 'robotics', name: 'Robotics', icon: '🤖' },
+    { id: 'computer-vision', name: 'Computer Vision', icon: Eye },
+    { id: 'nlp', name: 'Natural Language Processing', icon: FileText },
+    { id: 'reinforcement', name: 'Reinforcement Learning', icon: Gamepad2 },
+    { id: 'time-series', name: 'Time Series Analysis', icon: TrendingUp },
+    { id: 'tabular', name: 'Tabular Data', icon: BarChart3 },
+    { id: 'generative', name: 'Generative AI', icon: Palette },
+    { id: 'speech', name: 'Speech Recognition', icon: Mic },
+    { id: 'robotics', name: 'Robotics', icon: Bot },
   ];
 
   const difficulties = [
@@ -88,17 +89,17 @@ export default function CreateChallenge() {
           <h2 className="text-2xl font-semibold text-solar-gold mb-6">Why Create a Challenge?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="border-2 border-gray-600 p-6 bg-black">
-              <div className="text-3xl mb-4">🧠</div>
+              <Brain className="w-8 h-8 text-solar-gold mb-4" />
               <h3 className="text-lg font-semibold text-white mb-2">Advance Research</h3>
               <p className="text-gray-300 text-sm">Crowdsource solutions to complex AI problems and accelerate breakthrough discoveries.</p>
             </div>
             <div className="border-2 border-gray-600 p-6 bg-black">
-              <div className="text-3xl mb-4">🌍</div>
+              <Globe className="w-8 h-8 text-solar-gold mb-4" />
               <h3 className="text-lg font-semibold text-white mb-2">Global Talent</h3>
               <p className="text-gray-300 text-sm">Access diverse perspectives from AI researchers and practitioners worldwide.</p>
             </div>
             <div className="border-2 border-gray-600 p-6 bg-black">
-              <div className="text-3xl mb-4">💎</div>
+              <Gem className="w-8 h-8 text-solar-gold mb-4" />
               <h3 className="text-lg font-semibold text-white mb-2">Quality Solutions</h3>
               <p className="text-gray-300 text-sm">Competition drives innovation and produces high-quality, validated solutions.</p>
             </div>
@@ -209,7 +210,7 @@ export default function CreateChallenge() {
                   <option value="">Select a category</option>
                   {categories.map((category) => (
                     <option key={category.id} value={category.id}>
-                      {category.icon} {category.name}
+                      {category.name}
                     </option>
                   ))}
                 </select>

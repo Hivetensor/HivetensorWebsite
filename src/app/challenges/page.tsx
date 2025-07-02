@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Target, Eye, FileText, Gamepad2, TrendingUp, BarChart3, Palette } from 'lucide-react';
 
 export default function Challenges() {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -8,13 +9,13 @@ export default function Challenges() {
   const [selectedStatus, setSelectedStatus] = useState('active');
 
   const categories = [
-    { id: 'all', name: 'All Categories', icon: '🎯' },
-    { id: 'computer-vision', name: 'Computer Vision', icon: '👁️' },
-    { id: 'nlp', name: 'Natural Language', icon: '📝' },
-    { id: 'reinforcement', name: 'Reinforcement Learning', icon: '🎮' },
-    { id: 'time-series', name: 'Time Series', icon: '📈' },
-    { id: 'tabular', name: 'Tabular Data', icon: '📊' },
-    { id: 'generative', name: 'Generative AI', icon: '🎨' },
+    { id: 'all', name: 'All Categories', icon: Target },
+    { id: 'computer-vision', name: 'Computer Vision', icon: Eye },
+    { id: 'nlp', name: 'Natural Language', icon: FileText },
+    { id: 'reinforcement', name: 'Reinforcement Learning', icon: Gamepad2 },
+    { id: 'time-series', name: 'Time Series', icon: TrendingUp },
+    { id: 'tabular', name: 'Tabular Data', icon: BarChart3 },
+    { id: 'generative', name: 'Generative AI', icon: Palette },
   ];
 
   const difficulties = [
@@ -184,7 +185,7 @@ export default function Challenges() {
                   }`}
                 >
                   <div className="flex flex-col items-center space-y-1">
-                    <span className="text-lg">{category.icon}</span>
+                    <category.icon className="w-5 h-5" />
                     <span>{category.name}</span>
                   </div>
                 </button>
@@ -269,9 +270,10 @@ export default function Challenges() {
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div className="flex items-center space-x-2">
-                      <span className="text-2xl">
-                        {categories.find(c => c.id === challenge.category)?.icon}
-                      </span>
+                      {(() => {
+                        const CategoryIcon = categories.find(c => c.id === challenge.category)?.icon;
+                        return CategoryIcon ? <CategoryIcon className="w-6 h-6 text-solar-gold" /> : null;
+                      })()}
                       <span className={`px-2 py-1 text-xs font-bold rounded ${getStatusBadge(challenge.status)}`}>
                         {challenge.status.toUpperCase()}
                       </span>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Rocket, Trophy, DollarSign, Settings, Users, BookOpen, GraduationCap, MessageSquare } from 'lucide-react';
 
 export default function FAQ() {
   const [openAccordion, setOpenAccordion] = useState<number | null>(null);
@@ -13,7 +13,7 @@ export default function FAQ() {
   const faqCategories = [
     {
       category: "Getting Started",
-      icon: "🚀",
+      icon: Rocket,
       questions: [
         {
           question: "What is Hivetensor?",
@@ -35,7 +35,7 @@ export default function FAQ() {
     },
     {
       category: "Challenges & Competition",
-      icon: "🏆",
+      icon: Trophy,
       questions: [
         {
           question: "How are challenges evaluated?",
@@ -61,7 +61,7 @@ export default function FAQ() {
     },
     {
       category: "Rewards & Payments",
-      icon: "💰",
+      icon: DollarSign,
       questions: [
         {
           question: "How do I earn cryptocurrency rewards?",
@@ -87,7 +87,7 @@ export default function FAQ() {
     },
     {
       category: "Technical Details",
-      icon: "⚙️",
+      icon: Settings,
       questions: [
         {
           question: "What programming languages and frameworks can I use?",
@@ -113,7 +113,7 @@ export default function FAQ() {
     },
     {
       category: "Community & Support",
-      icon: "🤝",
+      icon: Users,
       questions: [
         {
           question: "How can I get help if I'm stuck?",
@@ -182,7 +182,7 @@ export default function FAQ() {
               {/* Category Header */}
               <div className="p-6 border-b border-gray-600">
                 <div className="flex items-center space-x-3">
-                  <span className="text-2xl">{category.icon}</span>
+                  <category.icon className="w-6 h-6 text-solar-gold" />
                   <h2 className="text-2xl font-semibold text-solar-gold">{category.category}</h2>
                 </div>
               </div>
@@ -233,7 +233,7 @@ export default function FAQ() {
           <h2 className="text-2xl font-semibold text-solar-gold mb-8 text-center">Additional Resources</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="border-2 border-gray-600 p-6 bg-black text-center">
-              <div className="text-3xl mb-4">📚</div>
+              <BookOpen className="w-8 h-8 text-solar-gold mb-4 mx-auto" />
               <h3 className="text-lg font-semibold text-white mb-2">Documentation</h3>
               <p className="text-gray-300 text-sm mb-4">
                 Comprehensive guides, API references, and technical documentation.
@@ -244,7 +244,7 @@ export default function FAQ() {
             </div>
 
             <div className="border-2 border-gray-600 p-6 bg-black text-center">
-              <div className="text-3xl mb-4">🎓</div>
+              <GraduationCap className="w-8 h-8 text-solar-gold mb-4 mx-auto" />
               <h3 className="text-lg font-semibold text-white mb-2">Tutorials</h3>
               <p className="text-gray-300 text-sm mb-4">
                 Step-by-step tutorials and our complete AutoML bootcamp curriculum.
@@ -255,12 +255,12 @@ export default function FAQ() {
             </div>
 
             <div className="border-2 border-gray-600 p-6 bg-black text-center">
-              <div className="text-3xl mb-4">💬</div>
+              <MessageSquare className="w-8 h-8 text-solar-gold mb-4 mx-auto" />
               <h3 className="text-lg font-semibold text-white mb-2">Community</h3>
               <p className="text-gray-300 text-sm mb-4">
                 Connect with other miners, share strategies, and get help from experts.
               </p>
-              <button className="border-2 border-solar-gold text-solar-gold px-4 py-2 font-bold hover:bg-solar-gold hover:text-black transition-all duration-300">
+              <button className="border-2 border-gray-600 text-gray-300 px-4 py-2 font-bold hover:bg-solar-gold hover:text-black transition-all duration-300">
                 JOIN FORUM
               </button>
             </div>
