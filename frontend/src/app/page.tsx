@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { 
   Twitter, 
@@ -15,8 +17,12 @@ import {
   Clock,
   Award
 } from 'lucide-react';
+import { useGlobalStats, useFeaturedCompetitions } from '@/hooks/useApi';
 
 export default function HomePage() {
+  const { data: globalStats, loading: statsLoading } = useGlobalStats();
+  const { data: featuredCompetitions, loading: competitionsLoading } = useFeaturedCompetitions();
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation */}
@@ -72,15 +78,21 @@ export default function HomePage() {
           {/* Live Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-16 max-w-4xl mx-auto">
             <div className="bg-white/5 border border-white/20 p-6 text-center backdrop-blur-sm">
-              <div className="text-2xl sm:text-3xl font-bold mb-2" style={{color: 'var(--solar-gold)'}}>$127,450</div>
+              <div className="text-2xl sm:text-3xl font-bold mb-2" style={{color: 'var(--solar-gold)'}}>
+                {statsLoading ? "..." : `$${globalStats?.total_jackpot?.toLocaleString() || "0"}`}
+              </div>
               <div className="text-white/70 text-xs sm:text-sm uppercase tracking-wider">Total Jackpot</div>
             </div>
             <div className="bg-white/5 border border-white/20 p-6 text-center backdrop-blur-sm">
-              <div className="text-2xl sm:text-3xl font-bold mb-2" style={{color: 'var(--solar-gold)'}}>2,847</div>
+              <div className="text-2xl sm:text-3xl font-bold mb-2" style={{color: 'var(--solar-gold)'}}>
+                {statsLoading ? "..." : globalStats?.active_miners?.toLocaleString() || "0"}
+              </div>
               <div className="text-white/70 text-xs sm:text-sm uppercase tracking-wider">Active Miners</div>
             </div>
             <div className="bg-white/5 border border-white/20 p-6 text-center backdrop-blur-sm">
-              <div className="text-2xl sm:text-3xl font-bold mb-2" style={{color: 'var(--solar-gold)'}}>156</div>
+              <div className="text-2xl sm:text-3xl font-bold mb-2" style={{color: 'var(--solar-gold)'}}>
+                {statsLoading ? "..." : globalStats?.live_challenges || "0"}
+              </div>
               <div className="text-white/70 text-xs sm:text-sm uppercase tracking-wider">Live Challenges</div>
             </div>
           </div>
@@ -98,117 +110,88 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Challenge Card 1 - Jackpot */}
-            <div className="bg-white/5 border border-yellow-500/50 p-6 relative animate-glow">
-              <div className="absolute top-4 right-4">
-                <span className="bg-yellow-500 text-black px-2 py-1 text-xs font-bold rounded">JACKPOT</span>
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-yellow-500 pt-2">E-commerce Conversion Prediction</h3>
-              <p className="text-white/70 text-sm mb-4">
-                Predict customer purchase probability from browsing behavior
-              </p>
-              
-              <div className="space-y-3 mb-6">
-                <div className="flex justify-between text-sm">
-                  <span className="text-white/60">Reward Pool</span>
-                  <span className="text-yellow-500 font-semibold">$15,250</span>
+            {competitionsLoading ? (
+              // Loading state
+              Array.from({ length: 3 }).map((_, i) => (
+                <div key={i} className="bg-white/5 border border-white/20 p-6 animate-pulse">
+                  <div className="h-6 bg-white/10 rounded mb-4"></div>
+                  <div className="h-4 bg-white/10 rounded mb-6"></div>
+                  <div className="space-y-3 mb-6">
+                    <div className="h-4 bg-white/10 rounded"></div>
+                    <div className="h-4 bg-white/10 rounded"></div>
+                  </div>
+                  <div className="h-10 bg-white/10 rounded"></div>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-white/60">Target Accuracy</span>
-                  <span className="text-white">94.5%</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-white/60">Progress</span>
-                  <span className="text-white">91.2%</span>
-                </div>
-              </div>
+              ))
+            ) : (
+              featuredCompetitions?.map((competition, index) => {
+                const isJackpot = index === 0; // Make the first (highest prize) the jackpot
+                const difficultyColor = {
+                  'beginner': 'green-400',
+                  'intermediate': 'yellow-400', 
+                  'advanced': 'orange-400',
+                  'expert': 'red-400'
+                }[competition.difficulty] || 'gray-400';
+                
+                // Calculate days left
+                const daysLeft = Math.ceil((new Date(competition.deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+                const timeLeft = daysLeft > 0 ? `${daysLeft}d left` : 'Expired';
+                
+                return (
+                  <div 
+                    key={competition.id} 
+                    className={`bg-white/5 border p-6 relative ${isJackpot ? 'border-yellow-500/50 animate-glow' : 'border-white/20'}`}
+                  >
+                    {isJackpot && (
+                      <div className="absolute top-4 right-4">
+                        <span className="bg-yellow-500 text-black px-2 py-1 text-xs font-bold rounded">JACKPOT</span>
+                      </div>
+                    )}
+                    
+                    <h3 className={`text-xl font-bold mb-2 ${isJackpot ? 'text-yellow-500 pt-2' : 'text-white'}`}>
+                      {competition.title}
+                    </h3>
+                    <p className="text-white/70 text-sm mb-4">
+                      {competition.description.length > 80 
+                        ? `${competition.description.substring(0, 80)}...` 
+                        : competition.description
+                      }
+                    </p>
+                    
+                    <div className="space-y-3 mb-6">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-white/60">Reward Pool</span>
+                        <span className="text-yellow-500 font-semibold">
+                          ${competition.prize_pool.toLocaleString()}
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-white/60">Metric</span>
+                        <span className="text-white">{competition.evaluation_metric}</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-white/60">Difficulty</span>
+                        <span className={`text-${difficultyColor} capitalize`}>
+                          {competition.difficulty}
+                        </span>
+                      </div>
+                    </div>
 
-              <div className="w-full bg-white/10 rounded-full h-2 mb-4">
-                <div className="bg-yellow-500 h-2 rounded-full" style={{width: '91.2%'}}></div>
-              </div>
+                    <div className="flex items-center justify-between text-xs text-white/60 mb-4">
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" /> {timeLeft}
+                      </span>
+                      <span className="capitalize">{competition.status}</span>
+                    </div>
 
-              <div className="flex items-center justify-between text-xs text-white/60 mb-4">
-                <span className="flex items-center gap-1"><Users className="w-3 h-3" /> 147 miners</span>
-                <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> 3d 14h left</span>
-              </div>
-
-              <Link href="/challenges" className="btn w-full inline-flex items-center justify-center gap-2">
-                <Coins className="w-4 h-4" />
-                Join Challenge
-              </Link>
-            </div>
-
-            {/* Challenge Card 2 */}
-            <div className="bg-white/5 border border-white/20 p-6">
-              <h3 className="text-xl font-bold mb-2 text-white">Financial Risk Assessment</h3>
-              <p className="text-white/70 text-sm mb-4">
-                Build models to assess loan default probability
-              </p>
-              
-              <div className="space-y-3 mb-6">
-                <div className="flex justify-between text-sm">
-                  <span className="text-white/60">Reward Pool</span>
-                  <span className="text-yellow-500 font-semibold">$8,750</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-white/60">Target Accuracy</span>
-                  <span className="text-white">92.0%</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-white/60">Progress</span>
-                  <span className="text-white">89.4%</span>
-                </div>
-              </div>
-
-              <div className="w-full bg-white/10 rounded-full h-2 mb-4">
-                <div className="bg-green-400 h-2 rounded-full" style={{width: '89.4%'}}></div>
-              </div>
-
-              <div className="flex items-center justify-between text-xs text-white/60 mb-4">
-                <span className="flex items-center gap-1"><Users className="w-3 h-3" /> 89 miners</span>
-                <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> 1d 8h left</span>
-              </div>
-
-              <Link href="/challenges" className="btn w-full">
-                View Details
-              </Link>
-            </div>
-
-            {/* Challenge Card 3 */}
-            <div className="bg-white/5 border border-white/20 p-6">
-              <h3 className="text-xl font-bold mb-2 text-white">Medical Image Classification</h3>
-              <p className="text-white/70 text-sm mb-4">
-                Classify X-ray images for disease detection
-              </p>
-              
-              <div className="space-y-3 mb-6">
-                <div className="flex justify-between text-sm">
-                  <span className="text-white/60">Reward Pool</span>
-                  <span className="text-yellow-500 font-semibold">$12,400</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-white/60">Target Accuracy</span>
-                  <span className="text-white">96.8%</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-white/60">Progress</span>
-                  <span className="text-white">93.1%</span>
-                </div>
-              </div>
-
-              <div className="w-full bg-white/10 rounded-full h-2 mb-4">
-                <div className="bg-blue-400 h-2 rounded-full" style={{width: '93.1%'}}></div>
-              </div>
-
-              <div className="flex items-center justify-between text-xs text-white/60 mb-4">
-                <span className="flex items-center gap-1"><Users className="w-3 h-3" /> 203 miners</span>
-                <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> 5d 12h left</span>
-              </div>
-
-              <Link href="/challenges" className="btn w-full">
-                View Details
-              </Link>
-            </div>
+                    <Link href={`/challenges/${competition.id}`} className="btn w-full inline-flex items-center justify-center gap-2">
+                      <Coins className="w-4 h-4" />
+                      {isJackpot ? 'Join Challenge' : 'View Details'}
+                    </Link>
+                  </div>
+                );
+              })
+            )}
           </div>
         </div>
       </section>
