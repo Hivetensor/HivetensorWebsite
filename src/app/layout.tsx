@@ -4,6 +4,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Hivetensor - The Liberation of Artificial Intelligence",
   description: "Individually we are drops, together we are the ocean. Abundance is our weapon against scarcity - join the swarm.",
+  icons: {
+    icon: '/hivetensor-logo.svg',
+    shortcut: '/hivetensor-logo.svg',
+    apple: '/hivetensor-logo.svg',
+  },
 };
 
 export default function RootLayout({

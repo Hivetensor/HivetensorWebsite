@@ -28,6 +28,7 @@ export default function HomePage() {
           </Link>
           <div className="hidden md:flex items-center gap-8">
             <Link href="/#how-it-works" className="text-white/80 hover:text-solar-gold transition-colors">How This Works</Link>
+            <Link href="/docs" className="text-white/80 hover:text-solar-gold transition-colors">Docs</Link>
             <Link href="/challenges" className="text-white/80 hover:text-solar-gold transition-colors">Challenges</Link>
             <Link href="/leaderboard" className="text-white/80 hover:text-solar-gold transition-colors">Leaderboard</Link>
             <Link href="/create" className="text-white/80 hover:text-solar-gold transition-colors">Create Challenge</Link>
