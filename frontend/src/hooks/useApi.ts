@@ -37,7 +37,7 @@ export function useApiData<T>(
     return () => {
       isMounted = false;
     };
-      }, [apiCall, ...dependencies]);
+  }, [...dependencies]);
 
   return { data, loading, error };
 }
@@ -59,22 +59,25 @@ export function useCompetitions(params?: {
   category?: string;
   status?: string;
 }) {
+  const apiCall = useCallback(() => apiService.getCompetitions(params), [
+    params?.skip, 
+    params?.limit, 
+    params?.category, 
+    params?.status
+  ]);
+  
   return useApiData(
-    () => apiService.getCompetitions(params),
+    apiCall,
     [params?.skip, params?.limit, params?.category, params?.status]
   );
 }
 
 export function useCompetition(id: number) {
-  return useApiData(
-    () => apiService.getCompetition(id),
-    [id]
-  );
+  const apiCall = useCallback(() => apiService.getCompetition(id), [id]);
+  return useApiData(apiCall, [id]);
 }
 
 export function useLeaderboard(competitionId: number) {
-  return useApiData(
-    () => apiService.getLeaderboard(competitionId),
-    [competitionId]
-  );
+  const apiCall = useCallback(() => apiService.getLeaderboard(competitionId), [competitionId]);
+  return useApiData(apiCall, [competitionId]);
 } 

@@ -198,21 +198,21 @@ export default function Challenges() {
                 const timeLeft = daysLeft > 0 ? `${daysLeft}d left` : 'Expired';
                 
                 return (
-                  <div key={challenge.id} className="border-2 border-gray-600 bg-black hover:border-solar-gold transition-all duration-300">
-                    <div className="p-6">
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="flex items-center space-x-2">
+               <div key={challenge.id} className="border-2 border-gray-600 bg-black hover:border-solar-gold transition-all duration-300">
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex items-center space-x-2">
                           <CategoryIcon className="w-6 h-6 text-solar-gold" />
-                          <span className={`px-2 py-1 text-xs font-bold rounded ${getStatusBadge(challenge.status)}`}>
-                            {challenge.status.toUpperCase()}
-                          </span>
-                        </div>
-                        <span className={`text-sm font-medium ${getDifficultyColor(challenge.difficulty)}`}>
-                          {challenge.difficulty.toUpperCase()}
-                        </span>
-                      </div>
+                      <span className={`px-2 py-1 text-xs font-bold rounded ${getStatusBadge(challenge.status)}`}>
+                        {challenge.status.toUpperCase()}
+                      </span>
+                    </div>
+                    <span className={`text-sm font-medium ${getDifficultyColor(challenge.difficulty)}`}>
+                      {challenge.difficulty.toUpperCase()}
+                    </span>
+                  </div>
 
-                      <h4 className="text-xl font-bold text-white mb-3">{challenge.title}</h4>
+                  <h4 className="text-xl font-bold text-white mb-3">{challenge.title}</h4>
                       <p className="text-gray-300 mb-4 text-sm leading-relaxed">
                         {challenge.description.length > 120 
                           ? `${challenge.description.substring(0, 120)}...` 
@@ -220,45 +220,45 @@ export default function Challenges() {
                         }
                       </p>
 
-                      <div className="space-y-3 mb-6">
-                        <div className="flex justify-between">
-                          <span className="text-gray-400">Prize Pool:</span>
+                  <div className="space-y-3 mb-6">
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Prize Pool:</span>
                           <span className="text-solar-gold font-mono font-bold">
                             ${challenge.prize_pool.toLocaleString()}
                           </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-400">Time Left:</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Time Left:</span>
                           <span className="text-white flex items-center gap-1">
                             <Clock className="w-3 h-3" /> {timeLeft}
                           </span>
-                        </div>
-                        <div className="flex justify-between">
+                    </div>
+                      <div className="flex justify-between">
                           <span className="text-gray-400">Metric:</span>
                           <span className="text-white">{challenge.evaluation_metric}</span>
-                        </div>
-                        <div className="flex justify-between">
+                      </div>
+                    <div className="flex justify-between">
                           <span className="text-gray-400">Category:</span>
                           <span className="text-white capitalize">{challenge.category.replace('-', ' ')}</span>
-                        </div>
-                      </div>
+                    </div>
+                  </div>
 
-                      <div className="space-y-3">
+                  <div className="space-y-3">
                         <Link 
                           href={`/challenges/${challenge.id}`} 
                           className="w-full bg-solar-gold text-black py-3 font-bold border-2 border-solar-gold hover:bg-black hover:text-solar-gold transition-all duration-300 text-center block"
                         >
-                          {challenge.status === 'active' ? 'JOIN CHALLENGE' : challenge.status === 'upcoming' ? 'NOTIFY ME' : 'VIEW RESULTS'}
+                      {challenge.status === 'active' ? 'JOIN CHALLENGE' : challenge.status === 'upcoming' ? 'NOTIFY ME' : 'VIEW RESULTS'}
                         </Link>
                         <Link 
                           href={`/challenges/${challenge.id}`}
                           className="w-full border-2 border-gray-600 text-gray-300 py-3 font-bold hover:border-solar-gold hover:text-solar-gold transition-all duration-300 text-center block"
                         >
-                          VIEW DETAILS
+                      VIEW DETAILS
                         </Link>
-                      </div>
-                    </div>
                   </div>
+                </div>
+              </div>
                 );
               })
             )}

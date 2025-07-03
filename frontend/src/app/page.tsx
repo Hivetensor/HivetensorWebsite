@@ -116,10 +116,10 @@ export default function HomePage() {
                 <div key={i} className="bg-white/5 border border-white/20 p-6 animate-pulse">
                   <div className="h-6 bg-white/10 rounded mb-4"></div>
                   <div className="h-4 bg-white/10 rounded mb-6"></div>
-                  <div className="space-y-3 mb-6">
+              <div className="space-y-3 mb-6">
                     <div className="h-4 bg-white/10 rounded"></div>
                     <div className="h-4 bg-white/10 rounded"></div>
-                  </div>
+                </div>
                   <div className="h-10 bg-white/10 rounded"></div>
                 </div>
               ))
@@ -145,50 +145,50 @@ export default function HomePage() {
                     {isJackpot && (
                       <div className="absolute top-4 right-4">
                         <span className="bg-yellow-500 text-black px-2 py-1 text-xs font-bold rounded">JACKPOT</span>
-                      </div>
+              </div>
                     )}
                     
                     <h3 className={`text-xl font-bold mb-2 ${isJackpot ? 'text-yellow-500 pt-2' : 'text-white'}`}>
                       {competition.title}
                     </h3>
-                    <p className="text-white/70 text-sm mb-4">
+              <p className="text-white/70 text-sm mb-4">
                       {competition.description.length > 80 
                         ? `${competition.description.substring(0, 80)}...` 
                         : competition.description
                       }
-                    </p>
-                    
-                    <div className="space-y-3 mb-6">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-white/60">Reward Pool</span>
+              </p>
+              
+              <div className="space-y-3 mb-6">
+                <div className="flex justify-between text-sm">
+                  <span className="text-white/60">Reward Pool</span>
                         <span className="text-yellow-500 font-semibold">
                           ${competition.prize_pool.toLocaleString()}
                         </span>
-                      </div>
-                      <div className="flex justify-between text-sm">
+                </div>
+                <div className="flex justify-between text-sm">
                         <span className="text-white/60">Metric</span>
                         <span className="text-white">{competition.evaluation_metric}</span>
-                      </div>
-                      <div className="flex justify-between text-sm">
+                </div>
+                <div className="flex justify-between text-sm">
                         <span className="text-white/60">Difficulty</span>
                         <span className={`text-${difficultyColor} capitalize`}>
                           {competition.difficulty}
                         </span>
-                      </div>
-                    </div>
+                </div>
+              </div>
 
-                    <div className="flex items-center justify-between text-xs text-white/60 mb-4">
+              <div className="flex items-center justify-between text-xs text-white/60 mb-4">
                       <span className="flex items-center gap-1">
                         <Clock className="w-3 h-3" /> {timeLeft}
                       </span>
                       <span className="capitalize">{competition.status}</span>
-                    </div>
+              </div>
 
                     <Link href={`/challenges/${competition.id}`} className="btn w-full inline-flex items-center justify-center gap-2">
                       <Coins className="w-4 h-4" />
                       {isJackpot ? 'Join Challenge' : 'View Details'}
-                    </Link>
-                  </div>
+              </Link>
+            </div>
                 );
               })
             )}
