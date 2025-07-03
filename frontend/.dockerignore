@@ -1,0 +1,17 @@
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.next
+.nuxt
+.vuepress/dist
+.serverless/
+.fusebox/
+.dynamodb/
+.DS_Store
+*.tgz
+.env*.local
+.vercel
+*.md 
