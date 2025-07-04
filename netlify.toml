@@ -1,0 +1,36 @@
+[build]
+  # Build commands and settings
+  command = "cd frontend && npm ci && npm run build"
+  publish = "frontend/out"
+  
+[build.environment]
+  # Node version for builds
+  NODE_VERSION = "18"
+  # API URL for production (will update with backend URL)
+  NEXT_PUBLIC_API_URL = "https://hivetensor-backend-yz34c.ondigitalocean.app"
+
+# Redirect rules for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["not found"]}
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache static assets
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Ignore backend changes for deployment
+[build.ignore]
+  command = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- frontend/" 

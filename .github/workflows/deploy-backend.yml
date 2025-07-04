@@ -1,0 +1,75 @@
+name: Deploy Backend to DigitalOcean
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+      - '.do/app.yaml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+      - '.do/app.yaml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        cd backend
+        pip install -r requirements.txt
+        
+    - name: Run tests
+      run: |
+        cd backend
+        # Add test commands here when tests are implemented
+        echo "Tests would run here"
+        
+    - name: Build and push Docker image
+      env:
+        DOCKER_REGISTRY: registry.digitalocean.com
+        IMAGE_NAME: hivetensor-backend
+      run: |
+        # Install doctl
+        cd ~
+        wget https://github.com/digitalocean/doctl/releases/download/v1.104.0/doctl-1.104.0-linux-amd64.tar.gz
+        tar xf ~/doctl-1.104.0-linux-amd64.tar.gz
+        sudo mv ~/doctl /usr/local/bin
+        
+        # Authenticate with DigitalOcean
+        doctl auth init -t ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        
+        # Login to registry
+        doctl registry login
+        
+        # Build and push image
+        cd ${{ github.workspace }}
+        docker build -t $DOCKER_REGISTRY/${{ secrets.DIGITALOCEAN_REGISTRY_NAME }}/$IMAGE_NAME:${{ github.sha }} ./backend
+        docker push $DOCKER_REGISTRY/${{ secrets.DIGITALOCEAN_REGISTRY_NAME }}/$IMAGE_NAME:${{ github.sha }}
+        
+    - name: Deploy to DigitalOcean App Platform
+      uses: digitalocean/app_action@v1.1.5
+      with:
+        app_name: hivetensor-backend
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        images: '[
+          {
+            "name": "api",
+            "image": {
+              "registry_type": "DOCR",
+              "repository": "${{ secrets.DIGITALOCEAN_REGISTRY_NAME }}/hivetensor-backend",
+              "tag": "${{ github.sha }}"
+            }
+          }
+        ]' 
