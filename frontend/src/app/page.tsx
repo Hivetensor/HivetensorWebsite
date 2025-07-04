@@ -3,11 +3,9 @@
 import Link from 'next/link';
 import { 
   Twitter, 
-  MessageCircle, 
   Github, 
   Send,
   TrendingUp,
-  Users,
   Trophy,
   Zap,
   Target,
@@ -15,33 +13,122 @@ import {
   ChevronRight,
   Star,
   Clock,
-  Award
+  Award,
+  Upload,
+  Settings,
+  Pickaxe
 } from 'lucide-react';
 import { useGlobalStats, useFeaturedCompetitions } from '@/hooks/useApi';
+import { useAuth } from '@/contexts/AuthContext';
+import Navigation from '@/components/Navigation';
 
 export default function HomePage() {
   const { data: globalStats, loading: statsLoading } = useGlobalStats();
   const { data: featuredCompetitions, loading: competitionsLoading } = useFeaturedCompetitions();
+  const { user, isAuthenticated } = useAuth();
+
+  const renderRoleSpecificContent = () => {
+    if (!isAuthenticated || !user) {
+      return (
+        <div className="text-center mb-16">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight leading-tight" style={{color: 'var(--solar-gold)', textShadow: '0 0 18px rgba(255, 155, 5, 0.35)'}}>
+            AutoML
+            <br />
+            <span className="text-white">Mining Pool</span>
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed mb-8">
+            Compete in decentralized AutoML challenges. Earn crypto rewards. 
+            <br className="hidden sm:block" />
+            <span className="font-semibold" style={{color: 'var(--solar-gold)'}}>Build the future of AI together.</span>
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+            <Link href="/auth/register" className="btn btn-primary inline-flex items-center justify-center gap-2 flex-1">
+              <Zap className="w-4 h-4" />
+              Start Mining
+            </Link>
+            <Link href="/create" className="btn inline-flex items-center justify-center gap-2 flex-1">
+              <Target className="w-4 h-4" />
+              Create Challenge
+            </Link>
+          </div>
+        </div>
+      );
+    }
+
+    // Role-specific welcome messages
+    if (user.role === 'miner') {
+      return (
+        <div className="text-center mb-16">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-6 tracking-tight leading-tight text-solar-gold">
+            Welcome back, <span className="text-white">{user.username}</span>
+          </h1>
+          <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed mb-8">
+            Ready to compete? Explore active challenges and earn crypto rewards for your AI solutions.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+            <Link href="/challenges" className="btn btn-primary inline-flex items-center justify-center gap-2 flex-1">
+              <Pickaxe className="w-4 h-4" />
+              Browse Challenges
+            </Link>
+            <Link href="/dashboard" className="btn inline-flex items-center justify-center gap-2 flex-1">
+              <Trophy className="w-4 h-4" />
+              My Dashboard
+            </Link>
+          </div>
+        </div>
+      );
+    }
+
+    if (user.role === 'creator') {
+      return (
+        <div className="text-center mb-16">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-6 tracking-tight leading-tight text-solar-gold">
+            Welcome back, <span className="text-white">{user.username}</span>
+          </h1>
+          <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed mb-8">
+            Manage your competitions and create new challenges for the community to solve.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+            <Link href="/create" className="btn btn-primary inline-flex items-center justify-center gap-2 flex-1">
+              <Upload className="w-4 h-4" />
+              Create Challenge
+            </Link>
+            <Link href="/dashboard" className="btn inline-flex items-center justify-center gap-2 flex-1">
+              <Settings className="w-4 h-4" />
+              My Dashboard
+            </Link>
+          </div>
+        </div>
+      );
+    }
+
+    // Default authenticated view
+    return (
+      <div className="text-center mb-16">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-6 tracking-tight leading-tight text-solar-gold">
+          Welcome to <span className="text-white">HiveTensor</span>
+        </h1>
+        <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed mb-8">
+          Your AI competition platform awaits. Explore challenges and start competing.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+          <Link href="/challenges" className="btn btn-primary inline-flex items-center justify-center gap-2 flex-1">
+            <Target className="w-4 h-4" />
+            Explore
+          </Link>
+          <Link href="/dashboard" className="btn inline-flex items-center justify-center gap-2 flex-1">
+            <Trophy className="w-4 h-4" />
+            Dashboard
+          </Link>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation */}
-      <nav className="border-b border-white/20 bg-black/95 backdrop-blur-sm fixed w-full z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center font-bold text-xl text-solar-gold hover:text-solar-amber transition-colors">
-            <span className="hex"></span>
-            HIVETENSOR
-          </Link>
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/#how-it-works" className="text-white/80 hover:text-solar-gold transition-colors">How This Works</Link>
-            <Link href="/docs" className="text-white/80 hover:text-solar-gold transition-colors">Docs</Link>
-            <Link href="/challenges" className="text-white/80 hover:text-solar-gold transition-colors">Challenges</Link>
-            <Link href="/leaderboard" className="text-white/80 hover:text-solar-gold transition-colors">Leaderboard</Link>
-            <Link href="/create" className="text-white/80 hover:text-solar-gold transition-colors">Create Challenge</Link>
-            <Link href="/faq" className="text-white/80 hover:text-solar-gold transition-colors">FAQ</Link>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="pt-24 pb-16 px-4 sm:px-6 relative overflow-hidden bg-black">
@@ -52,28 +139,7 @@ export default function HomePage() {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl" style={{background: 'rgba(255, 155, 5, 0.1)'}}></div>
         
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight leading-tight" style={{color: 'var(--solar-gold)', textShadow: '0 0 18px rgba(255, 155, 5, 0.35)'}}>
-              AutoML
-              <br />
-              <span className="text-white">Mining Pool</span>
-            </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed mb-8">
-              Compete in decentralized AutoML challenges. Earn crypto rewards. 
-              <br className="hidden sm:block" />
-              <span className="font-semibold" style={{color: 'var(--solar-gold)'}}>Build the future of AI together.</span>
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <Link href="/challenges" className="btn btn-primary inline-flex items-center justify-center gap-2 flex-1">
-                <Zap className="w-4 h-4" />
-                Start Mining
-              </Link>
-              <Link href="/create" className="btn inline-flex items-center justify-center gap-2 flex-1">
-                <Target className="w-4 h-4" />
-                Create Challenge
-              </Link>
-            </div>
-          </div>
+          {renderRoleSpecificContent()}
 
           {/* Live Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-16 max-w-4xl mx-auto">

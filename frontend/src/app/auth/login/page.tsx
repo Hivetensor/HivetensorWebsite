@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Eye, EyeOff, LogIn, Mail, Lock, AlertCircle } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function Login() {
   const router = useRouter();
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -31,18 +33,11 @@ export default function Login() {
     setError(null);
 
     try {
-      // TODO: Replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Mock delay
-      
-      // Mock validation
-      if (formData.email === 'test@example.com' && formData.password === 'password') {
-        // Success - redirect to dashboard or previous page
-        router.push('/dashboard');
-      } else {
-        setError('Invalid email or password');
-      }
+      await login(formData.email, formData.password);
+      // Success - redirect to dashboard
+      router.push('/dashboard');
     } catch (err) {
-      setError('Login failed. Please try again.');
+      setError(err instanceof Error ? err.message : 'Login failed. Please try again.');
     } finally {
       setLoading(false);
     }

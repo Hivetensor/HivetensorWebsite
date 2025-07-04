@@ -38,11 +38,19 @@ export class ApiService {
     const url = `${API_BASE_URL}${endpoint}`;
     
     try {
+      const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+        ...options?.headers,
+      };
+
+      // Add auth token if available
+      const token = localStorage.getItem('token');
+      if (token) {
+        (headers as any)['Authorization'] = `Bearer ${token}`;
+      }
+
       const response = await fetch(url, {
-        headers: {
-          'Content-Type': 'application/json',
-          ...options?.headers,
-        },
+        headers,
         ...options,
       });
 
@@ -91,7 +99,7 @@ export class ApiService {
     return this.request<LeaderboardEntry[]>(`/competitions/${competitionId}/leaderboard`);
   }
 
-  // Authentication (for future use)
+  // Authentication
   async register(userData: {
     email: string;
     username: string;
@@ -109,6 +117,10 @@ export class ApiService {
       method: 'POST', 
       body: JSON.stringify(credentials),
     });
+  }
+
+  async getCurrentUser() {
+    return this.request('/users/me');
   }
 }
 

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { 
-  Trophy, User, Upload, Settings, LogOut, 
+  Trophy, Settings, LogOut, 
   TrendingUp, Medal, Clock, DollarSign 
 } from 'lucide-react';
 

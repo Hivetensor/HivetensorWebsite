@@ -37,7 +37,7 @@ export function useApiData<T>(
     return () => {
       isMounted = false;
     };
-  }, [...dependencies]);
+  }, [apiCall, ...dependencies]);
 
   return { data, loading, error };
 }
@@ -59,12 +59,7 @@ export function useCompetitions(params?: {
   category?: string;
   status?: string;
 }) {
-  const apiCall = useCallback(() => apiService.getCompetitions(params), [
-    params?.skip, 
-    params?.limit, 
-    params?.category, 
-    params?.status
-  ]);
+  const apiCall = useCallback(() => apiService.getCompetitions(params), [params]);
   
   return useApiData(
     apiCall,

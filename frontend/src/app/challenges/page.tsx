@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Target, Eye, FileText, Gamepad2, TrendingUp, BarChart3, Palette, Clock, Users } from 'lucide-react';
+import { Target, Eye, FileText, Gamepad2, TrendingUp, BarChart3, Palette, Clock } from 'lucide-react';
 import { useCompetitions, useGlobalStats } from '@/hooks/useApi';
 import Link from 'next/link';
 

@@ -7,9 +7,11 @@ import {
   Eye, EyeOff, UserPlus, Mail, Lock, User, 
   AlertCircle, CheckCircle, Pickaxe, Upload 
 } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function Register() {
   const router = useRouter();
+  const { register } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -74,19 +76,22 @@ export default function Register() {
     setError(null);
 
     try {
-      // TODO: Replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 1500)); // Mock delay
+      await register({
+        email: formData.email,
+        username: formData.username,
+        password: formData.password,
+        role: formData.role
+      });
       
-      // Mock success
-      setSuccess('Account created successfully! Redirecting to login...');
+      // Success - redirect to dashboard (register function auto-logs in)
+      setSuccess('Account created successfully! Redirecting to dashboard...');
       
-      // Redirect to login after success
       setTimeout(() => {
-        router.push('/auth/login');
-      }, 2000);
+        router.push('/dashboard');
+      }, 1500);
       
     } catch (err) {
-      setError('Registration failed. Please try again.');
+      setError(err instanceof Error ? err.message : 'Registration failed. Please try again.');
     } finally {
       setLoading(false);
     }

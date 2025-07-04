@@ -4,8 +4,7 @@ import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import { 
   Clock, Trophy, Users, Target, Calendar, DollarSign, 
-  Download, Upload, Eye, Award, TrendingUp, Star,
-  CheckCircle, XCircle, AlertCircle
+  Download, Upload, Eye, Award,   CheckCircle, XCircle
 } from 'lucide-react';
 import { useCompetition, useLeaderboard } from '@/hooks/useApi';
 import Link from 'next/link';
@@ -18,8 +17,8 @@ export default function ChallengeDetails() {
   const { data: leaderboard, loading: leaderboardLoading } = useLeaderboard(challengeId);
 
   // Mock user state (will be replaced with real auth)
-  const [user, setUser] = useState<any>(null); // null = not logged in
-  const [userInCompetition, setUserInCompetition] = useState(false);
+  const [user] = useState<{ id: number; role: string } | null>(null); // null = not logged in
+  const [userInCompetition] = useState(false);
 
   if (error) {
     return (

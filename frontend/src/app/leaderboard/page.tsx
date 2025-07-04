@@ -139,7 +139,7 @@ export default function Leaderboard() {
           <h3 className="text-2xl font-semibold text-solar-gold mb-6">Platform Performance Trends</h3>
           <div className="border-2 border-gray-600 p-6 bg-black">
             <div className="grid grid-cols-6 gap-4 h-64">
-              {performanceData.map((data, index) => (
+              {performanceData.map((data) => (
                 <div key={data.month} className="flex flex-col justify-end items-center space-y-2">
                   <div className="text-xs text-gray-400">{data.participants}</div>
                   <div 
