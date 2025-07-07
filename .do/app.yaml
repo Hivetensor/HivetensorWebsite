@@ -23,13 +23,6 @@ services:
     scope: RUN_TIME
     value: "production"
 
-databases:
-- engine: PG
-  name: hivetensor-db
-  num_nodes: 1
-  size: basic-xs
-  version: "14"
-
 domains:
 - domain: api.hivetensor.com
   type: PRIMARY 

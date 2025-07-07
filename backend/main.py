@@ -22,6 +22,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Simple health check endpoint (required by DigitalOcean)
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+
 # Include routers
 app.include_router(auth.router, prefix="/api/v1", tags=["auth"])
 app.include_router(competitions.router, prefix="/api/v1", tags=["competitions"])
