@@ -47,6 +47,6 @@ jobs:
         sed -i 's/branch: be-integr/branch: main/' .do/app.yaml
         
         # Apply the updated app spec
-        doctl apps update fe5bf413-b4f1-45f3-aaeb-b8f8605dc3c8 --spec .do/app.yaml
+        doctl apps update e1f091e3-9368-42d2-a902-2fda5d15ebbb --spec .do/app.yaml
         
         echo "✅ App updated! DigitalOcean will now pull from main branch and rebuild automatically." 
