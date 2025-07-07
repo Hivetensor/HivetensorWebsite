@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 
 export default function ProfilePage() {
-  const { user, logout, isAuthenticated } = useAuth();
+  const { user, logout, isAuthenticated, loading } = useAuth();
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -20,10 +20,29 @@ export default function ProfilePage() {
     wallet_address: user?.wallet_address || '',
   });
 
-  // Redirect if not authenticated
+  // Handle redirect in useEffect to avoid SSR issues
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      router.push('/auth/login');
+    }
+  }, [isAuthenticated, loading, router]);
+
+  // Show loading state while auth is being determined
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-solar-gold"></div>
+      </div>
+    );
+  }
+
+  // Don't render content if not authenticated (redirect will happen)
   if (!isAuthenticated) {
-    router.push('/auth/login');
-    return null;
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-solar-gold"></div>
+      </div>
+    );
   }
 
   if (!user) {

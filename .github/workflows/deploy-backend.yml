@@ -6,11 +6,6 @@ on:
     paths:
       - 'backend/**'
       - '.do/app.yaml'
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'backend/**'
-      - '.do/app.yaml'
 
 jobs:
   deploy:
@@ -36,10 +31,7 @@ jobs:
         # Add test commands here when tests are implemented
         echo "Tests would run here"
         
-    - name: Build and push Docker image
-      env:
-        DOCKER_REGISTRY: registry.digitalocean.com
-        IMAGE_NAME: hivetensor-backend
+    - name: Update DigitalOcean App (Git-based deployment)
       run: |
         # Install doctl
         cd ~
@@ -50,26 +42,11 @@ jobs:
         # Authenticate with DigitalOcean
         doctl auth init -t ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
         
-        # Login to registry
-        doctl registry login
-        
-        # Build and push image
+        # Update app spec to use main branch
         cd ${{ github.workspace }}
-        docker build -t $DOCKER_REGISTRY/${{ secrets.DIGITALOCEAN_REGISTRY_NAME }}/$IMAGE_NAME:${{ github.sha }} ./backend
-        docker push $DOCKER_REGISTRY/${{ secrets.DIGITALOCEAN_REGISTRY_NAME }}/$IMAGE_NAME:${{ github.sha }}
+        sed -i 's/branch: be-integr/branch: main/' .do/app.yaml
         
-    - name: Deploy to DigitalOcean App Platform
-      uses: digitalocean/app_action@v1.1.5
-      with:
-        app_name: hivetensor-backend
-        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-        images: '[
-          {
-            "name": "api",
-            "image": {
-              "registry_type": "DOCR",
-              "repository": "${{ secrets.DIGITALOCEAN_REGISTRY_NAME }}/hivetensor-backend",
-              "tag": "${{ github.sha }}"
-            }
-          }
-        ]' 
+        # Apply the updated app spec
+        doctl apps update fe5bf413-b4f1-45f3-aaeb-b8f8605dc3c8 --spec .do/app.yaml
+        
+        echo "✅ App updated! DigitalOcean will now pull from main branch and rebuild automatically." 

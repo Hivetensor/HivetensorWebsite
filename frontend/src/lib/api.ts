@@ -67,10 +67,12 @@ export class ApiService {
         ...options?.headers,
       };
 
-      // Add auth token if available
-      const token = localStorage.getItem('token');
-      if (token) {
-        (headers as any)['Authorization'] = `Bearer ${token}`;
+      // Add auth token if available (only on client side)
+      if (typeof window !== 'undefined') {
+        const token = localStorage.getItem('token');
+        if (token) {
+          (headers as any)['Authorization'] = `Bearer ${token}`;
+        }
       }
 
       const response = await fetch(url, {

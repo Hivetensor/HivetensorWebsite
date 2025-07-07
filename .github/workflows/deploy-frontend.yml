@@ -37,7 +37,7 @@ jobs:
         cd frontend
         npm run build
       env:
-        NEXT_PUBLIC_API_URL: https://api.hivetensor.com
+        NEXT_PUBLIC_API_URL: https://hivetensor-backend-yz34c.ondigitalocean.app
         
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v3.0

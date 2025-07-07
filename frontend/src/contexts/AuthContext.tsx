@@ -35,10 +35,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Check for existing token on mount
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      // Try to get user data with existing token
-      fetchCurrentUser();
+    // Only access localStorage on client side
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (token) {
+        // Try to get user data with existing token
+        fetchCurrentUser();
+      } else {
+        setLoading(false);
+      }
     } else {
       setLoading(false);
     }
@@ -50,7 +55,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(userData);
     } catch {
       // Token might be invalid, clear it
-      localStorage.removeItem('token');
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('token');
+      }
       setUser(null);
     } finally {
       setLoading(false);
@@ -60,7 +67,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = async (email: string, password: string) => {
     try {
       const response = await apiService.login({ email, password }) as { access_token: string };
-      localStorage.setItem('token', response.access_token);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('token', response.access_token);
+      }
       await fetchCurrentUser();
     } catch (error) {
       throw error;
@@ -83,7 +92,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('token');
+    }
     setUser(null);
   };
 
