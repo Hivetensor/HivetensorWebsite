@@ -32,6 +32,30 @@ export interface LeaderboardEntry {
   submitted_at: string;
 }
 
+export interface UserDashboardStats {
+  active_competitions: number;
+  total_submissions: number;
+  best_rank: number | null;
+  estimated_earnings: number;
+}
+
+export interface UserActiveCompetition {
+  id: number;
+  title: string;
+  current_score: number;
+  current_rank: number;
+  days_left: number;
+  prize_pool: number;
+}
+
+export interface UserActivity {
+  type: string;
+  description: string;
+  timestamp: string;
+  score?: number;
+  competition_title?: string;
+}
+
 // API service class
 export class ApiService {
   private async request<T>(endpoint: string, options?: RequestInit): Promise<T> {
@@ -121,6 +145,19 @@ export class ApiService {
 
   async getCurrentUser() {
     return this.request('/users/me');
+  }
+
+  // User dashboard endpoints
+  async getUserDashboardStats(): Promise<UserDashboardStats> {
+    return this.request<UserDashboardStats>('/users/me/dashboard-stats');
+  }
+
+  async getUserActiveCompetitions(): Promise<UserActiveCompetition[]> {
+    return this.request<UserActiveCompetition[]>('/users/me/active-competitions');
+  }
+
+  async getUserRecentActivity(): Promise<UserActivity[]> {
+    return this.request<UserActivity[]>('/users/me/recent-activity');
   }
 }
 

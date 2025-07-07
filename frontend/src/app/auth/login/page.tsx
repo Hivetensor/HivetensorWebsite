@@ -35,7 +35,7 @@ export default function Login() {
     try {
       await login(formData.email, formData.password);
       // Success - redirect to dashboard
-      router.push('/dashboard');
+        router.push('/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Login failed. Please try again.');
     } finally {

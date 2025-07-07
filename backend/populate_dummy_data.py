@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from core.database import SessionLocal
 from models.models import User, Competition, Submission, UserRole, CompetitionStatus, CompetitionDifficulty
 from core.auth import get_password_hash
@@ -58,8 +58,8 @@ def create_dummy_data():
                 "category": "tabular",
                 "difficulty": CompetitionDifficulty.INTERMEDIATE,
                 "prize_pool": 15250.0,
-                "start_date": datetime.now() - timedelta(days=5),
-                "deadline": datetime.now() + timedelta(days=3),
+                "start_date": datetime.now(timezone.utc) - timedelta(days=5),
+                "deadline": datetime.now(timezone.utc) + timedelta(days=3),
                 "status": CompetitionStatus.ACTIVE,
                 "evaluation_metric": "AUC Score"
             },
@@ -69,8 +69,8 @@ def create_dummy_data():
                 "category": "computer-vision",
                 "difficulty": CompetitionDifficulty.ADVANCED,
                 "prize_pool": 25500.0,
-                "start_date": datetime.now() - timedelta(days=10),
-                "deadline": datetime.now() + timedelta(days=12),
+                "start_date": datetime.now(timezone.utc) - timedelta(days=10),
+                "deadline": datetime.now(timezone.utc) + timedelta(days=12),
                 "status": CompetitionStatus.ACTIVE,
                 "evaluation_metric": "Dice Coefficient"
             },
@@ -80,8 +80,8 @@ def create_dummy_data():
                 "category": "tabular",
                 "difficulty": CompetitionDifficulty.INTERMEDIATE,
                 "prize_pool": 8750.0,
-                "start_date": datetime.now() - timedelta(days=2),
-                "deadline": datetime.now() + timedelta(days=8),
+                "start_date": datetime.now(timezone.utc) - timedelta(days=2),
+                "deadline": datetime.now(timezone.utc) + timedelta(days=8),
                 "status": CompetitionStatus.ACTIVE,
                 "evaluation_metric": "F1 Score"
             },
@@ -91,8 +91,8 @@ def create_dummy_data():
                 "category": "time-series",
                 "difficulty": CompetitionDifficulty.ADVANCED,
                 "prize_pool": 31700.0,
-                "start_date": datetime.now() - timedelta(days=7),
-                "deadline": datetime.now() + timedelta(days=5),
+                "start_date": datetime.now(timezone.utc) - timedelta(days=7),
+                "deadline": datetime.now(timezone.utc) + timedelta(days=5),
                 "status": CompetitionStatus.ACTIVE,
                 "evaluation_metric": "Sharpe Ratio"
             },
@@ -102,8 +102,8 @@ def create_dummy_data():
                 "category": "reinforcement-learning",
                 "difficulty": CompetitionDifficulty.EXPERT,
                 "prize_pool": 42800.0,
-                "start_date": datetime.now() - timedelta(days=15),
-                "deadline": datetime.now() + timedelta(days=19),
+                "start_date": datetime.now(timezone.utc) - timedelta(days=15),
+                "deadline": datetime.now(timezone.utc) + timedelta(days=19),
                 "status": CompetitionStatus.ACTIVE,
                 "evaluation_metric": "Success Rate"
             },
@@ -113,8 +113,8 @@ def create_dummy_data():
                 "category": "generative",
                 "difficulty": CompetitionDifficulty.ADVANCED,
                 "prize_pool": 35000.0,
-                "start_date": datetime.now() + timedelta(days=3),
-                "deadline": datetime.now() + timedelta(days=45),
+                "start_date": datetime.now(timezone.utc) + timedelta(days=3),
+                "deadline": datetime.now(timezone.utc) + timedelta(days=45),
                 "status": CompetitionStatus.UPCOMING,
                 "evaluation_metric": "FID Score"
             },
@@ -124,8 +124,8 @@ def create_dummy_data():
                 "category": "tabular",
                 "difficulty": CompetitionDifficulty.BEGINNER,
                 "prize_pool": 12300.0,
-                "start_date": datetime.now() - timedelta(days=3),
-                "deadline": datetime.now() + timedelta(days=15),
+                "start_date": datetime.now(timezone.utc) - timedelta(days=3),
+                "deadline": datetime.now(timezone.utc) + timedelta(days=15),
                 "status": CompetitionStatus.ACTIVE,
                 "evaluation_metric": "AUC Score"
             },
@@ -135,8 +135,8 @@ def create_dummy_data():
                 "category": "nlp",
                 "difficulty": CompetitionDifficulty.INTERMEDIATE,
                 "prize_pool": 18200.0,
-                "start_date": datetime.now() - timedelta(days=6),
-                "deadline": datetime.now() + timedelta(days=8),
+                "start_date": datetime.now(timezone.utc) - timedelta(days=6),
+                "deadline": datetime.now(timezone.utc) + timedelta(days=8),
                 "status": CompetitionStatus.ACTIVE,
                 "evaluation_metric": "F1 Score"
             }
@@ -181,12 +181,14 @@ def create_dummy_data():
                     score_variation = random.uniform(-0.05, 0.03)  # Slight improvement over time
                     final_score = min(1.0, base_score + score_variation * j)
                     
+                    now_utc = datetime.now(timezone.utc)
+                    days_since_start = (now_utc - competition.start_date).days
                     submission = Submission(
                         user_id=miner.id,
                         competition_id=competition.id,
                         score=final_score,
-                        submitted_at=datetime.now() - timedelta(
-                            days=random.randint(0, (datetime.now() - competition.start_date).days),
+                        submitted_at=now_utc - timedelta(
+                            days=random.randint(0, max(0, days_since_start)),
                             hours=random.randint(0, 23),
                             minutes=random.randint(0, 59)
                         )

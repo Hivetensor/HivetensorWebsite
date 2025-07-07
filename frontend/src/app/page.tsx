@@ -29,29 +29,29 @@ export default function HomePage() {
 
   const renderRoleSpecificContent = () => {
     if (!isAuthenticated || !user) {
-      return (
-        <div className="text-center mb-16">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight leading-tight" style={{color: 'var(--solar-gold)', textShadow: '0 0 18px rgba(255, 155, 5, 0.35)'}}>
-            AutoML
-            <br />
-            <span className="text-white">Mining Pool</span>
-          </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed mb-8">
-            Compete in decentralized AutoML challenges. Earn crypto rewards. 
-            <br className="hidden sm:block" />
-            <span className="font-semibold" style={{color: 'var(--solar-gold)'}}>Build the future of AI together.</span>
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+  return (
+          <div className="text-center mb-16">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight leading-tight" style={{color: 'var(--solar-gold)', textShadow: '0 0 18px rgba(255, 155, 5, 0.35)'}}>
+              AutoML
+              <br />
+              <span className="text-white">Mining Pool</span>
+            </h1>
+            <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed mb-8">
+              Compete in decentralized AutoML challenges. Earn crypto rewards. 
+              <br className="hidden sm:block" />
+              <span className="font-semibold" style={{color: 'var(--solar-gold)'}}>Build the future of AI together.</span>
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
             <Link href="/auth/register" className="btn btn-primary inline-flex items-center justify-center gap-2 flex-1">
-              <Zap className="w-4 h-4" />
-              Start Mining
-            </Link>
-            <Link href="/create" className="btn inline-flex items-center justify-center gap-2 flex-1">
-              <Target className="w-4 h-4" />
-              Create Challenge
-            </Link>
+                <Zap className="w-4 h-4" />
+                Start Mining
+              </Link>
+              <Link href="/create" className="btn inline-flex items-center justify-center gap-2 flex-1">
+                <Target className="w-4 h-4" />
+                Create Challenge
+              </Link>
+            </div>
           </div>
-        </div>
       );
     }
 
