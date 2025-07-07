@@ -22,7 +22,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Simple health check endpoint (required by DigitalOcean)
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
