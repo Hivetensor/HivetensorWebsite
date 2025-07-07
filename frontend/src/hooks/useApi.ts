@@ -59,7 +59,12 @@ export function useCompetitions(params?: {
   category?: string;
   status?: string;
 }) {
-  const apiCall = useCallback(() => apiService.getCompetitions(params), [params]);
+  const apiCall = useCallback(() => apiService.getCompetitions(params), [
+    params?.skip, 
+    params?.limit, 
+    params?.category, 
+    params?.status
+  ]);
   
   return useApiData(
     apiCall,
