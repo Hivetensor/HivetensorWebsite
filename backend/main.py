@@ -1,8 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from core.database import engine, Base
 from core.config import settings
 from routers import auth, competitions, stats, users
+from sqlalchemy import text
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -22,13 +23,27 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Health check endpoint
+# Enhanced health check endpoint with database connectivity
 @app.get("/health")
 def health_check():
-    return {
-        "status": "healthy",
-        "environment": settings.ENVIRONMENT
-    }
+    try:
+        # Test database connectivity
+        with engine.connect() as connection:
+            connection.execute(text("SELECT 1"))
+        
+        return {
+            "status": "healthy",
+            "environment": settings.ENVIRONMENT,
+            "database": "connected"
+        }
+    except Exception as e:
+        # Return unhealthy if database is down
+        return {
+            "status": "unhealthy",
+            "environment": settings.ENVIRONMENT,
+            "database": "disconnected",
+            "error": str(e)
+        }
 
 # Include routers
 app.include_router(auth.router, prefix="/api/v1", tags=["auth"])
