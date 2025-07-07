@@ -1,18 +1,27 @@
 'use client';
 
 import { useState } from 'react';
-import { Target, Eye, FileText, Gamepad2, TrendingUp, BarChart3, Palette } from 'lucide-react';
+import { Target, Eye, FileText, Gamepad2, TrendingUp, BarChart3, Palette, Clock } from 'lucide-react';
+import { useCompetitions, useGlobalStats } from '@/hooks/useApi';
+import Link from 'next/link';
 
 export default function Challenges() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedDifficulty, setSelectedDifficulty] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState('active');
 
+  // Fetch data from API
+  const { data: competitions, loading: competitionsLoading } = useCompetitions({
+    category: selectedCategory === 'all' ? undefined : selectedCategory,
+    status: selectedStatus === 'all' ? undefined : selectedStatus
+  });
+  const { data: globalStats } = useGlobalStats();
+
   const categories = [
     { id: 'all', name: 'All Categories', icon: Target },
     { id: 'computer-vision', name: 'Computer Vision', icon: Eye },
     { id: 'nlp', name: 'Natural Language', icon: FileText },
-    { id: 'reinforcement', name: 'Reinforcement Learning', icon: Gamepad2 },
+    { id: 'reinforcement-learning', name: 'Reinforcement Learning', icon: Gamepad2 },
     { id: 'time-series', name: 'Time Series', icon: TrendingUp },
     { id: 'tabular', name: 'Tabular Data', icon: BarChart3 },
     { id: 'generative', name: 'Generative AI', icon: Palette },
@@ -32,110 +41,10 @@ export default function Challenges() {
     { id: 'completed', name: 'Completed' },
   ];
 
-  const challengesData = [
-    {
-      id: 1,
-      title: 'Medical Image Segmentation',
-      description: 'Segment tumors in medical CT scans using deep learning. Help advance medical AI diagnostics.',
-      category: 'computer-vision',
-      difficulty: 'advanced',
-      status: 'active',
-      prizePool: 25.5,
-      participants: 342,
-      timeLeft: '12 days',
-      accuracy: 0.94,
-      submissions: 1248,
-      sponsor: 'MedAI Labs',
-      dataset: 'CT Scan Dataset (15GB)',
-      metric: 'Dice Coefficient',
-    },
-    {
-      id: 2,
-      title: 'Sentiment Analysis at Scale',
-      description: 'Analyze sentiment in millions of social media posts. Real-world social media data processing.',
-      category: 'nlp',
-      difficulty: 'intermediate',
-      status: 'active',
-      prizePool: 18.2,
-      participants: 567,
-      timeLeft: '8 days',
-      accuracy: 0.87,
-      submissions: 892,
-      sponsor: 'SocialTech Inc',
-      dataset: 'Twitter Posts (8GB)',
-      metric: 'F1 Score',
-    },
-    {
-      id: 3,
-      title: 'Autonomous Drone Navigation',
-      description: 'Train RL agents to navigate complex 3D environments. Cutting-edge robotics AI challenge.',
-      category: 'reinforcement',
-      difficulty: 'expert',
-      status: 'active',
-      prizePool: 42.8,
-      participants: 156,
-      timeLeft: '19 days',
-      accuracy: 0.76,
-      submissions: 234,
-      sponsor: 'DroneCore Robotics',
-      dataset: 'Simulation Environment',
-      metric: 'Success Rate',
-    },
-    {
-      id: 4,
-      title: 'Stock Price Prediction',
-      description: 'Predict stock movements using historical market data and news sentiment.',
-      category: 'time-series',
-      difficulty: 'intermediate',
-      status: 'active',
-      prizePool: 31.7,
-      participants: 789,
-      timeLeft: '5 days',
-      accuracy: 0.68,
-      submissions: 1567,
-      sponsor: 'QuantFin Corp',
-      dataset: 'Market Data (12GB)',
-      metric: 'Sharpe Ratio',
-    },
-    {
-      id: 5,
-      title: 'Customer Churn Prediction',
-      description: 'Predict customer churn for telecom companies using tabular data analysis.',
-      category: 'tabular',
-      difficulty: 'beginner',
-      status: 'active',
-      prizePool: 12.3,
-      participants: 1023,
-      timeLeft: '15 days',
-      accuracy: 0.82,
-      submissions: 2341,
-      sponsor: 'TelecomAI',
-      dataset: 'Customer Data (2GB)',
-      metric: 'AUC Score',
-    },
-    {
-      id: 6,
-      title: 'AI Art Generation',
-      description: 'Generate artistic images from text prompts. Push the boundaries of creative AI.',
-      category: 'generative',
-      difficulty: 'advanced',
-      status: 'upcoming',
-      prizePool: 35.0,
-      participants: 0,
-      timeLeft: 'Starts in 3 days',
-      accuracy: null,
-      submissions: 0,
-      sponsor: 'CreativeAI Studio',
-      dataset: 'Art Dataset (20GB)',
-      metric: 'FID Score',
-    },
-  ];
-
-  const filteredChallenges = challengesData.filter(challenge => {
-    return (selectedCategory === 'all' || challenge.category === selectedCategory) &&
-           (selectedDifficulty === 'all' || challenge.difficulty === selectedDifficulty) &&
-           (selectedStatus === 'all' || challenge.status === selectedStatus);
-  });
+  // Filter competitions based on selected filters
+  const filteredChallenges = competitions?.filter(competition => {
+    return (selectedDifficulty === 'all' || competition.difficulty === selectedDifficulty);
+  }) || [];
 
   const getDifficultyColor = (difficulty: string) => {
     const diff = difficulties.find(d => d.id === difficulty);
@@ -239,22 +148,24 @@ export default function Challenges() {
           <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-solar-gold font-semibold mb-2">Active Challenges</h3>
             <p className="text-3xl font-bold">
-              {challengesData.filter(c => c.status === 'active').length}
+              {globalStats?.live_challenges || 0}
             </p>
           </div>
           <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-solar-gold font-semibold mb-2">Total Prize Pool</h3>
-            <p className="text-3xl font-bold">₿ {challengesData.reduce((sum, c) => sum + c.prizePool, 0).toFixed(1)}</p>
-          </div>
-          <div className="border-2 border-gray-600 p-6 bg-black">
-            <h3 className="text-solar-gold font-semibold mb-2">Total Participants</h3>
             <p className="text-3xl font-bold">
-              {challengesData.reduce((sum, c) => sum + c.participants, 0).toLocaleString()}
+              ${globalStats?.total_jackpot?.toLocaleString() || '0'}
             </p>
           </div>
           <div className="border-2 border-gray-600 p-6 bg-black">
-            <h3 className="text-solar-gold font-semibold mb-2">Submissions Today</h3>
-            <p className="text-3xl font-bold">156</p>
+            <h3 className="text-solar-gold font-semibold mb-2">Total Users</h3>
+            <p className="text-3xl font-bold">
+              {globalStats?.total_users?.toLocaleString() || '0'}
+            </p>
+          </div>
+          <div className="border-2 border-gray-600 p-6 bg-black">
+            <h3 className="text-solar-gold font-semibold mb-2">Active Miners</h3>
+            <p className="text-3xl font-bold">{globalStats?.active_miners || '0'}</p>
           </div>
         </div>
 
@@ -265,15 +176,33 @@ export default function Challenges() {
             ({filteredChallenges.length})
           </h3>
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-                         {filteredChallenges.map((challenge) => (
+            {competitionsLoading ? (
+              // Loading state
+              Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="border-2 border-gray-600 bg-black p-6 animate-pulse">
+                  <div className="h-6 bg-white/10 rounded mb-4"></div>
+                  <div className="h-4 bg-white/10 rounded mb-6"></div>
+                  <div className="space-y-3 mb-6">
+                    <div className="h-4 bg-white/10 rounded"></div>
+                    <div className="h-4 bg-white/10 rounded"></div>
+                    <div className="h-4 bg-white/10 rounded"></div>
+                  </div>
+                  <div className="h-10 bg-white/10 rounded mb-3"></div>
+                  <div className="h-10 bg-white/10 rounded"></div>
+                </div>
+              ))
+            ) : (
+              filteredChallenges.map((challenge) => {
+                const CategoryIcon = categories.find(c => c.id === challenge.category)?.icon || Target;
+                const daysLeft = Math.ceil((new Date(challenge.deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+                const timeLeft = daysLeft > 0 ? `${daysLeft}d left` : 'Expired';
+                
+                return (
                <div key={challenge.id} className="border-2 border-gray-600 bg-black hover:border-solar-gold transition-all duration-300">
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div className="flex items-center space-x-2">
-                      {(() => {
-                        const CategoryIcon = categories.find(c => c.id === challenge.category)?.icon;
-                        return CategoryIcon ? <CategoryIcon className="w-6 h-6 text-solar-gold" /> : null;
-                      })()}
+                          <CategoryIcon className="w-6 h-6 text-solar-gold" />
                       <span className={`px-2 py-1 text-xs font-bold rounded ${getStatusBadge(challenge.status)}`}>
                         {challenge.status.toUpperCase()}
                       </span>
@@ -284,59 +213,55 @@ export default function Challenges() {
                   </div>
 
                   <h4 className="text-xl font-bold text-white mb-3">{challenge.title}</h4>
-                  <p className="text-gray-300 mb-4 text-sm leading-relaxed">{challenge.description}</p>
+                      <p className="text-gray-300 mb-4 text-sm leading-relaxed">
+                        {challenge.description.length > 120 
+                          ? `${challenge.description.substring(0, 120)}...` 
+                          : challenge.description
+                        }
+                      </p>
 
                   <div className="space-y-3 mb-6">
                     <div className="flex justify-between">
                       <span className="text-gray-400">Prize Pool:</span>
-                      <span className="text-solar-gold font-mono font-bold">₿ {challenge.prizePool}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Participants:</span>
-                      <span className="text-white">{challenge.participants.toLocaleString()}</span>
+                          <span className="text-solar-gold font-mono font-bold">
+                            ${challenge.prize_pool.toLocaleString()}
+                          </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-400">Time Left:</span>
-                      <span className="text-white">{challenge.timeLeft}</span>
+                          <span className="text-white flex items-center gap-1">
+                            <Clock className="w-3 h-3" /> {timeLeft}
+                          </span>
                     </div>
-                    {challenge.accuracy && (
                       <div className="flex justify-between">
-                        <span className="text-gray-400">Best Score:</span>
-                        <span className="text-green-400 font-mono">{challenge.accuracy.toFixed(3)}</span>
+                          <span className="text-gray-400">Metric:</span>
+                          <span className="text-white">{challenge.evaluation_metric}</span>
                       </div>
-                    )}
                     <div className="flex justify-between">
-                      <span className="text-gray-400">Submissions:</span>
-                      <span className="text-white">{challenge.submissions.toLocaleString()}</span>
-                    </div>
-                  </div>
-
-                  <div className="border-t border-gray-700 pt-4 mb-6 space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-400">Sponsor:</span>
-                      <span className="text-white">{challenge.sponsor}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-400">Dataset:</span>
-                      <span className="text-white">{challenge.dataset}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-400">Metric:</span>
-                      <span className="text-white">{challenge.metric}</span>
+                          <span className="text-gray-400">Category:</span>
+                          <span className="text-white capitalize">{challenge.category.replace('-', ' ')}</span>
                     </div>
                   </div>
 
                   <div className="space-y-3">
-                    <button className="w-full bg-solar-gold text-black py-3 font-bold border-2 border-solar-gold hover:bg-black hover:text-solar-gold transition-all duration-300">
+                        <Link 
+                          href={`/challenges/${challenge.id}`} 
+                          className="w-full bg-solar-gold text-black py-3 font-bold border-2 border-solar-gold hover:bg-black hover:text-solar-gold transition-all duration-300 text-center block"
+                        >
                       {challenge.status === 'active' ? 'JOIN CHALLENGE' : challenge.status === 'upcoming' ? 'NOTIFY ME' : 'VIEW RESULTS'}
-                    </button>
-                    <button className="w-full border-2 border-gray-600 text-gray-300 py-3 font-bold hover:border-solar-gold hover:text-solar-gold transition-all duration-300">
+                        </Link>
+                        <Link 
+                          href={`/challenges/${challenge.id}`}
+                          className="w-full border-2 border-gray-600 text-gray-300 py-3 font-bold hover:border-solar-gold hover:text-solar-gold transition-all duration-300 text-center block"
+                        >
                       VIEW DETAILS
-                    </button>
+                        </Link>
                   </div>
                 </div>
               </div>
-            ))}
+                );
+              })
+            )}
           </div>
         </div>
 
