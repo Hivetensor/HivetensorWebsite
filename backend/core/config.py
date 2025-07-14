@@ -14,7 +14,7 @@ class Settings:
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
     
     # CORS configuration
-    CORS_ORIGINS: str = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
+    CORS_ORIGINS: str = os.getenv("CORS_ORIGINS", "http://localhost:3131,http://127.0.0.1:3131")
     
     # Environment
     ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
