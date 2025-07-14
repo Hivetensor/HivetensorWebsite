@@ -25,7 +25,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "8181:8181"
+      - "8000:8000"
     environment:
       DATABASE_URL: postgresql://hivetensor_user:hivetensor_password@db:5432/hivetensor
       SECRET_KEY: your-super-secret-key-change-this-in-production
@@ -37,7 +37,7 @@ services:
         condition: service_healthy
     volumes:
       - ./backend:/app
-    command: uvicorn main:app --host 0.0.0.0 --port 8181 --reload
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 
   # Frontend
   frontend:
@@ -48,7 +48,7 @@ services:
     ports:
       - "3131:3131"
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:8181/
+      NEXT_PUBLIC_API_URL: http://localhost:8000/
     depends_on:
       - backend
 
