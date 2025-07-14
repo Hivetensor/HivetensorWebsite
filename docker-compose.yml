@@ -48,7 +48,7 @@ services:
     ports:
       - "3131:3131"
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:8181
+      NEXT_PUBLIC_API_URL: http://localhost:8181/
     depends_on:
       - backend
 
