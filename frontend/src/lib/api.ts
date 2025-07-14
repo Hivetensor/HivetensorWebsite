@@ -1,7 +1,5 @@
 // API configuration and types
-const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-const API_BASE_URL = baseUrl.replace(/\/$/, '') + '/api/v1';
-
+const API_BASE_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/') + 'api/v1';
 // Types for API responses
 export interface Competition {
   id: number;
