@@ -304,73 +304,73 @@ export default function HomePage() {
       </section>
 
       {/* Top Miners Preview */}
-      <section className="py-16 px-4 sm:px-6 bg-black">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12 gap-4">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white">Top Miners</h2>
-            <Link href="/leaderboard" className="btn inline-flex items-center gap-2 self-start">
-              Full Leaderboard <ChevronRight className="w-4 h-4" />
-            </Link>
-          </div>
+      {/*<section className="py-16 px-4 sm:px-6 bg-black">*/}
+      {/*  <div className="max-w-7xl mx-auto">*/}
+      {/*    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12 gap-4">*/}
+      {/*      <h2 className="text-3xl sm:text-4xl font-bold text-white">Top Miners</h2>*/}
+      {/*      <Link href="/leaderboard" className="btn inline-flex items-center gap-2 self-start">*/}
+      {/*        Full Leaderboard <ChevronRight className="w-4 h-4" />*/}
+      {/*      </Link>*/}
+      {/*    </div>*/}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Top Miner Cards */}
-            <div className="bg-white/5 border border-yellow-500/30 p-6 text-center">
-              <div className="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Trophy className="w-8 h-8 text-black" />
-              </div>
-              <h3 className="text-lg font-bold text-yellow-500 mb-1">AIWizard_2024</h3>
-              <p className="text-white/60 text-sm mb-3">Rank #1</p>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-white/60">Total Earned</span>
-                  <span className="text-yellow-500">$23,450</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-white/60">Challenges Won</span>
-                  <span className="text-white">47</span>
-                </div>
-              </div>
-            </div>
+      {/*    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">*/}
+      {/*      /!* Top Miner Cards *!/*/}
+      {/*      <div className="bg-white/5 border border-yellow-500/30 p-6 text-center">*/}
+      {/*        <div className="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">*/}
+      {/*          <Trophy className="w-8 h-8 text-black" />*/}
+      {/*        </div>*/}
+      {/*        <h3 className="text-lg font-bold text-yellow-500 mb-1">AIWizard_2024</h3>*/}
+      {/*        <p className="text-white/60 text-sm mb-3">Rank #1</p>*/}
+      {/*        <div className="space-y-2 text-sm">*/}
+      {/*          <div className="flex justify-between">*/}
+      {/*            <span className="text-white/60">Total Earned</span>*/}
+      {/*            <span className="text-yellow-500">$23,450</span>*/}
+      {/*          </div>*/}
+      {/*          <div className="flex justify-between">*/}
+      {/*            <span className="text-white/60">Challenges Won</span>*/}
+      {/*            <span className="text-white">47</span>*/}
+      {/*          </div>*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
 
-            <div className="bg-white/5 border border-white/20 p-6 text-center">
-              <div className="w-16 h-16 bg-gray-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="w-8 h-8 text-black" />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-1">DataMaster_X</h3>
-              <p className="text-white/60 text-sm mb-3">Rank #2</p>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-white/60">Total Earned</span>
-                  <span className="text-yellow-500">$19,280</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-white/60">Challenges Won</span>
-                  <span className="text-white">34</span>
-                </div>
-              </div>
-            </div>
+      {/*      <div className="bg-white/5 border border-white/20 p-6 text-center">*/}
+      {/*        <div className="w-16 h-16 bg-gray-500 rounded-full flex items-center justify-center mx-auto mb-4">*/}
+      {/*          <Award className="w-8 h-8 text-black" />*/}
+      {/*        </div>*/}
+      {/*        <h3 className="text-lg font-bold text-white mb-1">DataMaster_X</h3>*/}
+      {/*        <p className="text-white/60 text-sm mb-3">Rank #2</p>*/}
+      {/*        <div className="space-y-2 text-sm">*/}
+      {/*          <div className="flex justify-between">*/}
+      {/*            <span className="text-white/60">Total Earned</span>*/}
+      {/*            <span className="text-yellow-500">$19,280</span>*/}
+      {/*          </div>*/}
+      {/*          <div className="flex justify-between">*/}
+      {/*            <span className="text-white/60">Challenges Won</span>*/}
+      {/*            <span className="text-white">34</span>*/}
+      {/*          </div>*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
 
-            <div className="bg-white/5 border border-white/20 p-6 text-center sm:col-span-2 lg:col-span-1">
-              <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-black" />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-1">MLNinja_Pro</h3>
-              <p className="text-white/60 text-sm mb-3">Rank #3</p>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-white/60">Total Earned</span>
-                  <span className="text-yellow-500">$16,790</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-white/60">Challenges Won</span>
-                  <span className="text-white">28</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/*      <div className="bg-white/5 border border-white/20 p-6 text-center sm:col-span-2 lg:col-span-1">*/}
+      {/*        <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">*/}
+      {/*          <Star className="w-8 h-8 text-black" />*/}
+      {/*        </div>*/}
+      {/*        <h3 className="text-lg font-bold text-white mb-1">MLNinja_Pro</h3>*/}
+      {/*        <p className="text-white/60 text-sm mb-3">Rank #3</p>*/}
+      {/*        <div className="space-y-2 text-sm">*/}
+      {/*          <div className="flex justify-between">*/}
+      {/*            <span className="text-white/60">Total Earned</span>*/}
+      {/*            <span className="text-yellow-500">$16,790</span>*/}
+      {/*          </div>*/}
+      {/*          <div className="flex justify-between">*/}
+      {/*            <span className="text-white/60">Challenges Won</span>*/}
+      {/*            <span className="text-white">28</span>*/}
+      {/*          </div>*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</section>*/}
 
       {/* Footer */}
       <footer className="bg-black border-t border-white/20 py-12 px-4 sm:px-6">
