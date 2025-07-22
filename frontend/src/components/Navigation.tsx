@@ -37,6 +37,9 @@ export default function Navigation() {
             <Link href="/#how-it-works" className="text-white/80 hover:text-solar-gold transition-colors">
               How It Works
             </Link>
+            <Link href="/automl-zero" className="text-white/80 hover:text-solar-gold transition-colors">
+              AutoML Zero
+            </Link>
             <Link href="/docs" className="text-white/80 hover:text-solar-gold transition-colors">
               Docs
             </Link>
@@ -165,6 +168,13 @@ export default function Navigation() {
                 onClick={() => setShowMobileMenu(false)}
               >
                 How It Works
+              </Link>
+              <Link 
+                href="/automl-zero" 
+                className="text-white/80 hover:text-solar-gold transition-colors"
+                onClick={() => setShowMobileMenu(false)}
+              >
+                AutoML Zero
               </Link>
               <Link 
                 href="/docs" 

@@ -16,7 +16,9 @@ import {
   Award,
   Upload,
   Settings,
-  Pickaxe
+  Pickaxe,
+  Brain,
+  ArrowRight
 } from 'lucide-react';
 import { useGlobalStats, useFeaturedCompetitions } from '@/hooks/useApi';
 import { useAuth } from '@/contexts/AuthContext';
@@ -41,6 +43,20 @@ export default function HomePage() {
               <br className="hidden sm:block" />
               <span className="font-semibold" style={{color: 'var(--solar-gold)'}}>Build the future of AI together.</span>
             </p>
+            <div className="mb-8">
+              <div className="bg-solar-gold/10 border border-solar-gold/30 p-4 rounded-lg max-w-xl mx-auto">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Brain className="w-5 h-5 text-solar-gold" />
+                    <span className="text-solar-gold font-semibold">Current Focus: AutoML Zero Research</span>
+                  </div>
+                  <Link href="/automl-zero" className="btn btn-primary inline-flex items-center justify-center gap-2 text-sm px-4 py-2">
+                    <ArrowRight className="w-4 h-4" />
+                    Learn More
+                  </Link>
+                </div>
+              </div>
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
             <Link href="/auth/register" className="btn btn-primary inline-flex items-center justify-center gap-2 flex-1">
                 <Zap className="w-4 h-4" />

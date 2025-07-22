@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from core.database import engine, Base
 from core.config import settings
-from routers import auth, competitions, stats, users
+from routers import auth, competitions, stats, users, automl_zero
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -31,6 +31,7 @@ app.include_router(auth.router, prefix="/api/v1", tags=["auth"])
 app.include_router(competitions.router, prefix="/api/v1", tags=["competitions"])
 app.include_router(stats.router, prefix="/api/v1", tags=["stats"])
 app.include_router(users.router, prefix="/api/v1", tags=["users"])
+app.include_router(automl_zero.router, prefix="/api/v1", tags=["automl-zero"])
 
 @app.get("/")
 def read_root():
