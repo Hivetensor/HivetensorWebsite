@@ -55,6 +55,69 @@ export interface UserActivity {
   competition_title?: string;
 }
 
+// AutoML Zero types
+export interface AutoMLZeroInfo {
+  project_name: string;
+  description: string;
+  current_focus: string;
+  status: string;
+  github_url: string;
+  features: string[];
+  current_task: {
+    name: string;
+    description: string;
+    input_dim: number;
+    task_type: string;
+    baseline_accuracy: number;
+    target_accuracy: number;
+  };
+  algorithm_components: {
+    setup_phase: string;
+    predict_phase: string;
+    learn_phase: string;
+  };
+  evolutionary_params: {
+    max_generations: number;
+    population_size: number;
+    mutation_rate: number;
+    crossover_rate: number;
+  };
+  supported_operations: string[];
+}
+
+export interface AutoMLZeroProgress {
+  current_generation: number;
+  best_accuracy: number;
+  algorithms_evaluated: number;
+  total_compute_hours: number;
+  active_miners: number;
+  discovered_algorithms: Array<{
+    id: string;
+    accuracy: number;
+    complexity: string;
+    description: string;
+  }>;
+  evolution_trend: {
+    generations: number[];
+    best_accuracies: number[];
+  };
+}
+
+export interface AutoMLZeroTasks {
+  current_task: {
+    name: string;
+    type: string;
+    status: string;
+    description: string;
+  };
+  planned_tasks: Array<{
+    name: string;
+    type: string;
+    status: string;
+    description: string;
+  }>;
+}
+
 // API service class
 export class ApiService {
   private async request<T>(endpoint: string, options?: RequestInit): Promise<T> {
@@ -159,6 +222,19 @@ export class ApiService {
 
   async getUserRecentActivity(): Promise<UserActivity[]> {
     return this.request<UserActivity[]>('/users/me/recent-activity');
+  }
+
+  // AutoML Zero endpoints
+  async getAutoMLZeroInfo(): Promise<AutoMLZeroInfo> {
+    return this.request<AutoMLZeroInfo>('/automl-zero/info');
+  }
+
+  async getAutoMLZeroProgress(): Promise<AutoMLZeroProgress> {
+    return this.request<AutoMLZeroProgress>('/automl-zero/progress');
+  }
+
+  async getAutoMLZeroTasks(): Promise<AutoMLZeroTasks> {
+    return this.request<AutoMLZeroTasks>('/automl-zero/tasks');
   }
 }
 

@@ -11,7 +11,8 @@ import {
   Book,
   ExternalLink,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  Brain
 } from 'lucide-react';
 
 export default function DocsPage() {
@@ -44,6 +45,12 @@ export default function DocsPage() {
             <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto">
               Everything you need to get started with Hivetensor's decentralized AutoML platform.
             </p>
+            <div className="mt-6">
+              <Link href="/automl-zero" className="btn btn-primary inline-flex items-center justify-center gap-2">
+                <Brain className="w-4 h-4" />
+                Learn About AutoML Zero
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -94,6 +101,27 @@ export default function DocsPage() {
               <li><strong className="text-solar-gold">Fair Rewards:</strong> Crypto payments based on model accuracy and ranking</li>
               <li><strong className="text-solar-gold">Open Innovation:</strong> Real-world problems solved collaboratively</li>
             </ul>
+          </div>
+
+          <div className="bg-solar-gold/10 border border-solar-gold/30 p-8 mb-8">
+            <h3 className="text-xl font-bold mb-4 text-solar-gold">Current Focus: AutoML Zero Research</h3>
+            <p className="text-white/80 mb-4">
+              We're currently focused on AutoML Zero - a revolutionary approach to discovering machine learning algorithms from scratch 
+              through evolutionary computation. Instead of just tuning existing algorithms, we're building AI that can create AI.
+            </p>
+            <p className="text-white/80 mb-4">
+              Our AutoML Zero implementation includes:
+            </p>
+            <ul className="list-disc list-inside text-white/70 space-y-2 ml-4 mb-4">
+              <li><strong className="text-solar-gold">Domain-Specific Language:</strong> Custom DSL for representing algorithms</li>
+              <li><strong className="text-solar-gold">Evolutionary Framework:</strong> Genetic algorithms for discovering new ML algorithms</li>
+              <li><strong className="text-solar-gold">Bittensor Integration:</strong> Decentralized computation network</li>
+              <li><strong className="text-solar-gold">MNIST Binary Challenge:</strong> Initial test case for algorithm discovery</li>
+            </ul>
+            <Link href="/automl-zero" className="btn btn-primary inline-flex items-center justify-center gap-2">
+              <Brain className="w-4 h-4" />
+              Learn More About AutoML Zero
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

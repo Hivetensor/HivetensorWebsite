@@ -80,4 +80,20 @@ export function useCompetition(id: number) {
 export function useLeaderboard(competitionId: number) {
   const apiCall = useCallback(() => apiService.getLeaderboard(competitionId), [competitionId]);
   return useApiData(apiCall, [competitionId]);
+}
+
+// AutoML Zero hooks
+export function useAutoMLZeroInfo() {
+  const apiCall = useCallback(() => apiService.getAutoMLZeroInfo(), []);
+  return useApiData(apiCall);
+}
+
+export function useAutoMLZeroProgress() {
+  const apiCall = useCallback(() => apiService.getAutoMLZeroProgress(), []);
+  return useApiData(apiCall);
+}
+
+export function useAutoMLZeroTasks() {
+  const apiCall = useCallback(() => apiService.getAutoMLZeroTasks(), []);
+  return useApiData(apiCall);
 } 
