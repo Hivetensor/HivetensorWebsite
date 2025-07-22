@@ -44,19 +44,17 @@ export default function HomePage() {
               <span className="font-semibold" style={{color: 'var(--solar-gold)'}}>Build the future of AI together.</span>
             </p>
             <div className="mb-8">
-              <div className="bg-solar-gold/10 border border-solar-gold/30 p-6 rounded-lg max-w-2xl mx-auto">
-                <div className="flex items-center gap-3 mb-3">
-                  <Brain className="w-5 h-5 text-solar-gold" />
-                  <span className="text-solar-gold font-semibold">Current Focus: AutoML Zero Research</span>
+              <div className="bg-solar-gold/10 border border-solar-gold/30 p-4 rounded-lg max-w-xl mx-auto">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Brain className="w-5 h-5 text-solar-gold" />
+                    <span className="text-solar-gold font-semibold">Current Focus: AutoML Zero Research</span>
+                  </div>
+                  <Link href="/automl-zero" className="btn btn-primary inline-flex items-center justify-center gap-2 text-sm px-4 py-2">
+                    <ArrowRight className="w-4 h-4" />
+                    Learn More
+                  </Link>
                 </div>
-                <p className="text-white/80 text-sm mb-4">
-                  We're currently focused on AutoML Zero - discovering machine learning algorithms from scratch through evolutionary computation. 
-                  This foundational research will power our full platform.
-                </p>
-                <Link href="/automl-zero" className="btn btn-primary inline-flex items-center justify-center gap-2">
-                  <ArrowRight className="w-4 h-4" />
-                  Learn About AutoML Zero
-                </Link>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
