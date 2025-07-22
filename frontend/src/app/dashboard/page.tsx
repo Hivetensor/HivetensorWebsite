@@ -247,6 +247,7 @@ export default function Dashboard() {
               ) : (
                 <div className="text-center py-8 text-gray-400">
                   <p>No active competitions yet.</p>
+                  <p className="text-sm mt-2">Competitions will appear here once we launch.</p>
                   <Link 
                     href="/challenges" 
                     className="text-solar-gold hover:text-yellow-400 font-semibold"

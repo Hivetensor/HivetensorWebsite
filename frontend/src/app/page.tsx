@@ -32,9 +32,9 @@ export default function HomePage() {
   return (
           <div className="text-center mb-16">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight leading-tight" style={{color: 'var(--solar-gold)', textShadow: '0 0 18px rgba(255, 155, 5, 0.35)'}}>
-              AutoML
+              Coming Soon
               <br />
-              <span className="text-white">Mining Pool</span>
+              <span className="text-white">AutoML Mining Pool</span>
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed mb-8">
               Compete in decentralized AutoML challenges. Earn crypto rewards. 
@@ -141,7 +141,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto relative z-10">
           {renderRoleSpecificContent()}
 
-          {/* Live Stats */}
+          {/* Live Stats - Hidden for coming soon mode */}
+          {false && (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-16 max-w-4xl mx-auto">
             <div className="bg-white/5 border border-white/20 p-6 text-center backdrop-blur-sm">
               <div className="text-2xl sm:text-3xl font-bold mb-2" style={{color: 'var(--solar-gold)'}}>
@@ -162,105 +163,106 @@ export default function HomePage() {
               <div className="text-white/70 text-xs sm:text-sm uppercase tracking-wider">Live Challenges</div>
             </div>
           </div>
+          )}
         </div>
       </section>
 
-      {/* Featured Challenges */}
-      <section className="py-16 px-4 sm:px-6 bg-black">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12 gap-4">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white">Featured Challenges</h2>
-            <Link href="/challenges" className="btn inline-flex items-center gap-2 self-start">
-              View All <ChevronRight className="w-4 h-4" />
-            </Link>
-          </div>
+      {/*/!* Featured Challenges *!/*/}
+      {/*<section className="py-16 px-4 sm:px-6 bg-black">*/}
+      {/*  <div className="max-w-7xl mx-auto">*/}
+      {/*    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12 gap-4">*/}
+      {/*      <h2 className="text-3xl sm:text-4xl font-bold text-white">Featured Challenges</h2>*/}
+      {/*      <Link href="/challenges" className="btn inline-flex items-center gap-2 self-start">*/}
+      {/*        View All <ChevronRight className="w-4 h-4" />*/}
+      {/*      </Link>*/}
+      {/*    </div>*/}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {competitionsLoading ? (
-              // Loading state
-              Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="bg-white/5 border border-white/20 p-6 animate-pulse">
-                  <div className="h-6 bg-white/10 rounded mb-4"></div>
-                  <div className="h-4 bg-white/10 rounded mb-6"></div>
-              <div className="space-y-3 mb-6">
-                    <div className="h-4 bg-white/10 rounded"></div>
-                    <div className="h-4 bg-white/10 rounded"></div>
-                </div>
-                  <div className="h-10 bg-white/10 rounded"></div>
-                </div>
-              ))
-            ) : (
-              featuredCompetitions?.map((competition, index) => {
-                const isJackpot = index === 0; // Make the first (highest prize) the jackpot
-                const difficultyColor = {
-                  'beginner': 'green-400',
-                  'intermediate': 'yellow-400', 
-                  'advanced': 'orange-400',
-                  'expert': 'red-400'
-                }[competition.difficulty] || 'gray-400';
-                
-                // Calculate days left
-                const daysLeft = Math.ceil((new Date(competition.deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
-                const timeLeft = daysLeft > 0 ? `${daysLeft}d left` : 'Expired';
-                
-                return (
-                  <div 
-                    key={competition.id} 
-                    className={`bg-white/5 border p-6 relative ${isJackpot ? 'border-yellow-500/50 animate-glow' : 'border-white/20'}`}
-                  >
-                    {isJackpot && (
-                      <div className="absolute top-4 right-4">
-                        <span className="bg-yellow-500 text-black px-2 py-1 text-xs font-bold rounded">JACKPOT</span>
-              </div>
-                    )}
-                    
-                    <h3 className={`text-xl font-bold mb-2 ${isJackpot ? 'text-yellow-500 pt-2' : 'text-white'}`}>
-                      {competition.title}
-                    </h3>
-              <p className="text-white/70 text-sm mb-4">
-                      {competition.description.length > 80 
-                        ? `${competition.description.substring(0, 80)}...` 
-                        : competition.description
-                      }
-              </p>
-              
-              <div className="space-y-3 mb-6">
-                <div className="flex justify-between text-sm">
-                  <span className="text-white/60">Reward Pool</span>
-                        <span className="text-yellow-500 font-semibold">
-                          ${competition.prize_pool.toLocaleString()}
-                        </span>
-                </div>
-                <div className="flex justify-between text-sm">
-                        <span className="text-white/60">Metric</span>
-                        <span className="text-white">{competition.evaluation_metric}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                        <span className="text-white/60">Difficulty</span>
-                        <span className={`text-${difficultyColor} capitalize`}>
-                          {competition.difficulty}
-                        </span>
-                </div>
-              </div>
+      {/*    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">*/}
+      {/*      {competitionsLoading ? (*/}
+      {/*        // Loading state*/}
+      {/*        Array.from({ length: 3 }).map((_, i) => (*/}
+      {/*          <div key={i} className="bg-white/5 border border-white/20 p-6 animate-pulse">*/}
+      {/*            <div className="h-6 bg-white/10 rounded mb-4"></div>*/}
+      {/*            <div className="h-4 bg-white/10 rounded mb-6"></div>*/}
+      {/*        <div className="space-y-3 mb-6">*/}
+      {/*              <div className="h-4 bg-white/10 rounded"></div>*/}
+      {/*              <div className="h-4 bg-white/10 rounded"></div>*/}
+      {/*          </div>*/}
+      {/*            <div className="h-10 bg-white/10 rounded"></div>*/}
+      {/*          </div>*/}
+      {/*        ))*/}
+      {/*      ) : (*/}
+      {/*        featuredCompetitions?.map((competition, index) => {*/}
+      {/*          const isJackpot = index === 0; // Make the first (highest prize) the jackpot*/}
+      {/*          const difficultyColor = {*/}
+      {/*            'beginner': 'green-400',*/}
+      {/*            'intermediate': 'yellow-400', */}
+      {/*            'advanced': 'orange-400',*/}
+      {/*            'expert': 'red-400'*/}
+      {/*          }[competition.difficulty] || 'gray-400';*/}
+      {/*          */}
+      {/*          // Calculate days left*/}
+      {/*          const daysLeft = Math.ceil((new Date(competition.deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24));*/}
+      {/*          const timeLeft = daysLeft > 0 ? `${daysLeft}d left` : 'Expired';*/}
+      {/*          */}
+      {/*          return (*/}
+      {/*            <div */}
+      {/*              key={competition.id} */}
+      {/*              className={`bg-white/5 border p-6 relative ${isJackpot ? 'border-yellow-500/50 animate-glow' : 'border-white/20'}`}*/}
+      {/*            >*/}
+      {/*              {isJackpot && (*/}
+      {/*                <div className="absolute top-4 right-4">*/}
+      {/*                  <span className="bg-yellow-500 text-black px-2 py-1 text-xs font-bold rounded">JACKPOT</span>*/}
+      {/*        </div>*/}
+      {/*              )}*/}
+      {/*              */}
+      {/*              <h3 className={`text-xl font-bold mb-2 ${isJackpot ? 'text-yellow-500 pt-2' : 'text-white'}`}>*/}
+      {/*                {competition.title}*/}
+      {/*              </h3>*/}
+      {/*        <p className="text-white/70 text-sm mb-4">*/}
+      {/*                {competition.description.length > 80 */}
+      {/*                  ? `${competition.description.substring(0, 80)}...` */}
+      {/*                  : competition.description*/}
+      {/*                }*/}
+      {/*        </p>*/}
+      {/*        */}
+      {/*        <div className="space-y-3 mb-6">*/}
+      {/*          <div className="flex justify-between text-sm">*/}
+      {/*            <span className="text-white/60">Reward Pool</span>*/}
+      {/*                  <span className="text-yellow-500 font-semibold">*/}
+      {/*                    ${competition.prize_pool.toLocaleString()}*/}
+      {/*                  </span>*/}
+      {/*          </div>*/}
+      {/*          <div className="flex justify-between text-sm">*/}
+      {/*                  <span className="text-white/60">Metric</span>*/}
+      {/*                  <span className="text-white">{competition.evaluation_metric}</span>*/}
+      {/*          </div>*/}
+      {/*          <div className="flex justify-between text-sm">*/}
+      {/*                  <span className="text-white/60">Difficulty</span>*/}
+      {/*                  <span className={`text-${difficultyColor} capitalize`}>*/}
+      {/*                    {competition.difficulty}*/}
+      {/*                  </span>*/}
+      {/*          </div>*/}
+      {/*        </div>*/}
 
-              <div className="flex items-center justify-between text-xs text-white/60 mb-4">
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" /> {timeLeft}
-                      </span>
-                      <span className="capitalize">{competition.status}</span>
-              </div>
+      {/*        <div className="flex items-center justify-between text-xs text-white/60 mb-4">*/}
+      {/*                <span className="flex items-center gap-1">*/}
+      {/*                  <Clock className="w-3 h-3" /> {timeLeft}*/}
+      {/*                </span>*/}
+      {/*                <span className="capitalize">{competition.status}</span>*/}
+      {/*        </div>*/}
 
-                    <Link href={`/challenges/${competition.id}`} className="btn w-full inline-flex items-center justify-center gap-2">
-                      <Coins className="w-4 h-4" />
-                      {isJackpot ? 'Join Challenge' : 'View Details'}
-              </Link>
-            </div>
-                );
-              })
-            )}
-          </div>
-        </div>
-      </section>
+      {/*              <Link href={`/challenges/${competition.id}`} className="btn w-full inline-flex items-center justify-center gap-2">*/}
+      {/*                <Coins className="w-4 h-4" />*/}
+      {/*                {isJackpot ? 'Join Challenge' : 'View Details'}*/}
+      {/*        </Link>*/}
+      {/*      </div>*/}
+      {/*          );*/}
+      {/*        })*/}
+      {/*      )}*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</section>*/}
 
       {/* How It Works */}
       <section id="how-it-works" className="py-16 px-4 sm:px-6 bg-black">

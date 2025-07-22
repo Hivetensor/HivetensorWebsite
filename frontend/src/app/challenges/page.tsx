@@ -143,7 +143,8 @@ export default function Challenges() {
           </div>
         </div>
 
-        {/* Quick Stats */}
+        {/* Quick Stats - Hidden for coming soon mode */}
+        {false && (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
           <div className="border-2 border-gray-600 p-6 bg-black">
             <h3 className="text-solar-gold font-semibold mb-2">Active Challenges</h3>
@@ -168,8 +169,19 @@ export default function Challenges() {
             <p className="text-3xl font-bold">{globalStats?.active_miners || '0'}</p>
           </div>
         </div>
+        )}
 
-        {/* Challenges Grid */}
+        {/* Coming Soon State */}
+        <div className="text-center py-16">
+          <Target className="w-20 h-20 text-solar-gold mx-auto mb-6 opacity-50" />
+          <h3 className="text-3xl font-bold text-white mb-4">No Challenges Yet</h3>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            We&apos;re preparing exciting AI challenges for you. Stay tuned for future competitions!
+          </p>
+        </div>
+
+        {/* Challenges Grid - Hidden for coming soon mode */}
+        {false && (
         <div>
           <h3 className="text-2xl font-semibold text-solar-gold mb-6">
             {selectedStatus.charAt(0).toUpperCase() + selectedStatus.slice(1)} Challenges 
@@ -264,18 +276,19 @@ export default function Challenges() {
             )}
           </div>
         </div>
+        )}
 
         {/* Create Challenge CTA */}
         <div className="mt-16 text-center">
           <div className="border-2 border-solar-gold p-8 bg-black">
-            <h3 className="text-2xl font-bold text-solar-gold mb-4">Have a Challenge Idea?</h3>
+            <h3 className="text-2xl font-bold text-solar-gold mb-4">Want to Create a Challenge?</h3>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              Create your own AI challenge and sponsor the prize pool. 
-              Help advance AI research while engaging with the community.
+              Submit your AI challenge idea and our team will review it. 
+              Help shape the future of competitive machine learning.
             </p>
-            <button className="bg-solar-gold text-black px-8 py-3 font-bold border-2 border-solar-gold hover:bg-black hover:text-solar-gold transition-all duration-300">
-              CREATE CHALLENGE
-            </button>
+            <Link href="/create" className="bg-solar-gold text-black px-8 py-3 font-bold border-2 border-solar-gold hover:bg-black hover:text-solar-gold transition-all duration-300 inline-block">
+              SUBMIT CHALLENGE IDEA
+            </Link>
           </div>
         </div>
       </div>
