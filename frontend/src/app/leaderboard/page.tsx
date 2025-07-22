@@ -58,14 +58,37 @@ export default function Leaderboard() {
               LEADERBOARD
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Track the top performing miners across all challenges. 
-              Compete, earn, and climb the ranks in the decentralized AI revolution.
+              Competition results and top performing miners will appear here once we launch. 
+              See how miners rank across different AI challenges.
             </p>
           </div>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        {/* Coming Soon State */}
+        <div className="text-center py-20">
+          <Trophy className="w-20 h-20 text-solar-gold mx-auto mb-6 opacity-50" />
+          <h3 className="text-3xl font-bold text-white mb-4">No Competitions Yet</h3>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
+            Leaderboard rankings and competition results will appear here once challenges go live. 
+            See top performing miners across different categories.
+          </p>
+          <div className="bg-white/5 border border-white/20 p-6 max-w-md mx-auto">
+            <h4 className="text-lg font-semibold text-solar-gold mb-2">Coming Soon:</h4>
+            <ul className="text-sm text-gray-300 space-y-1">
+              <li>• Global miner rankings</li>
+              <li>• Category-specific leaderboards</li>
+              <li>• Performance metrics & trends</li>
+              <li>• Earnings tracking</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* All existing content - Hidden for coming soon mode */}
+        {false && (
+          <>
         {/* Filters */}
         <div className="mb-12 space-y-6">
           <div>
@@ -241,6 +264,8 @@ export default function Leaderboard() {
             </div>
           </div>
         </div>
+        </>
+        )}
       </div>
     </main>
   );
