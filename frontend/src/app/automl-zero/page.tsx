@@ -66,7 +66,7 @@ export default function AutoMLZeroPage() {
                 <Play className="w-4 h-4" />
                 Learn More
               </Link>
-              <a href="https://github.com/Hivetensor/AutoMLInfinite-efficiency" target="_blank" rel="noopener noreferrer" className="btn inline-flex items-center justify-center gap-2 flex-1">
+              <a href="https://github.com/Hivetensor/AutoMLInfinite" target="_blank" rel="noopener noreferrer" className="btn inline-flex items-center justify-center gap-2 flex-1">
                 <Github className="w-4 h-4" />
                 View Code
               </a>
@@ -311,7 +311,7 @@ export default function AutoMLZeroPage() {
               <p className="text-white/70 text-sm mb-4">
                 Check out our AutoML Zero implementation on GitHub and contribute to the development.
               </p>
-              <a href="https://github.com/Hivetensor/AutoMLInfinite-efficiency" target="_blank" rel="noopener noreferrer" className="btn btn-primary inline-flex items-center justify-center gap-2">
+              <a href="https://github.com/Hivetensor/AutoMLInfinite" target="_blank" rel="noopener noreferrer" className="btn btn-primary inline-flex items-center justify-center gap-2">
                 <Github className="w-4 h-4" />
                 View Repository
               </a>
