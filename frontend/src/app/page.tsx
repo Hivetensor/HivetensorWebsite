@@ -32,9 +32,9 @@ export default function HomePage() {
   return (
           <div className="text-center mb-16">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight leading-tight" style={{color: 'var(--solar-gold)', textShadow: '0 0 18px rgba(255, 155, 5, 0.35)'}}>
-              AutoML
+              Coming Soon
               <br />
-              <span className="text-white">Mining Pool</span>
+              <span className="text-white">AutoML Mining Pool</span>
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed mb-8">
               Compete in decentralized AutoML challenges. Earn crypto rewards. 
@@ -141,7 +141,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto relative z-10">
           {renderRoleSpecificContent()}
 
-          {/* Live Stats */}
+          {/* Live Stats - Hidden for coming soon mode */}
+          {false && (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-16 max-w-4xl mx-auto">
             <div className="bg-white/5 border border-white/20 p-6 text-center backdrop-blur-sm">
               <div className="text-2xl sm:text-3xl font-bold mb-2" style={{color: 'var(--solar-gold)'}}>
@@ -162,6 +163,7 @@ export default function HomePage() {
               <div className="text-white/70 text-xs sm:text-sm uppercase tracking-wider">Live Challenges</div>
             </div>
           </div>
+          )}
         </div>
       </section>
 
