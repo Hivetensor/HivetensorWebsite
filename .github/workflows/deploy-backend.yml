@@ -1,0 +1,72 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Create image tag
+        id: tag
+        run: |
+          sha=${GITHUB_SHA::8}
+          timestamp=$(date +%s)
+          echo "build_id=${sha}-${timestamp}" >> $GITHUB_OUTPUT
+
+      - name: Login to DO Container Registry
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.CI_CD_TOKEN_DIGITALOCEAN }}
+
+      - name: Configure DO Container Registry
+        run: doctl registry login --expiry-seconds 300
+
+      - name: Build and push backend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend
+          push: true
+          tags: registry.digitalocean.com/${{ secrets.REGISTRY_NAME_DIGITALOCEAN }}/backend:${{ steps.tag.outputs.build_id }},registry.digitalocean.com/${{ secrets.REGISTRY_NAME_DIGITALOCEAN }}/backend:latest
+
+      - name: Deploy to VM
+        uses: appleboy/ssh-action@v1.2.1
+        with:
+          host: ${{ secrets.HOST_DIGITALOCEAN }}
+          username: ${{ secrets.USER_DIGITALOCEAN }}
+          key: ${{ secrets.SSH_KEY_DIGITALOCEAN }}
+          script: |
+            # Login to registry
+            doctl registry login --expiry-seconds 300
+            
+            # Pull new image
+            docker pull registry.digitalocean.com/${{ secrets.REGISTRY_NAME_DIGITALOCEAN }}/backend:latest
+            
+            # Stop and remove existing container
+            docker stop hivetensor-backend || true
+            docker rm hivetensor-backend || true
+            
+            # Start new container with .env file
+            docker run -d --name hivetensor-backend \
+              --restart unless-stopped \
+              -p 8000:8000 \
+              --env-file /home/noble/.env.backend \
+              --log-driver json-file \
+              --log-opt max-size=10m \
+              --log-opt max-file=3 \
+              registry.digitalocean.com/${{ secrets.REGISTRY_NAME_DIGITALOCEAN }}/backend:latest
+            
+            # Cleanup
+            docker system prune -f
