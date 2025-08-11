@@ -24,7 +24,7 @@ app.add_middleware(
 
 @app.get("/health")
 def health_check():
-    return {"status": "ok"}
+    return {"status": "ok. This is a test."}
 
 # Include routers
 app.include_router(auth.router, prefix="/api/v1", tags=["auth"])
